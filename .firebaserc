@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "calin-codes": {
+      "hosting": {
+        "ng-shift": [
+          "ng-shift"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "calin-codes"
+  }
+}
