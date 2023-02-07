@@ -1,0 +1,27 @@
+<header>
+  <div class="container flex">
+    <a routerLink="/" class="logo ff-handlee fs-primary__heading">NgShift</a>
+    <nav class="flex">
+      <ul class="nav-wrapper flex">
+        <li *ngIf="authLink.register.path === url" class="flex">
+          <a [routerLink]="authLink.login.path">{{ authLink.login.name }}</a>
+        </li>
+        <li *ngIf="authLink.login.path === url" class="flex">
+          <a [routerLink]="authLink.register.path">{{
+            authLink.register.name
+          }}</a>
+        </li>
+        <li class="menu-container flex-column">
+          <p class="hello-para">Hello,</p>
+          <a>John</a>
+          <div class="menu flow">
+            <a routerLink="/dashboard">Dashboard</a>
+            <a routerLink="/add-shift">Add Shift</a>
+            <a routerLink="/profile">Profile</a>
+            <a>Logout</a>
+          </div>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>

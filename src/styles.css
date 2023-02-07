@@ -1,1 +1,271 @@
-/* You can add global styles to this file, and also import other style files */
+@import url("https://fonts.googleapis.com/css2?family=Handlee&family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;1,500&display=swap");
+
+:root {
+  /* color variables */
+
+  --main-background-color: hsl(233, 36%, 9%);
+  --section-background-color: hsl(233, 36%, 18%);
+  --main-txt-color: hsl(214, 64%, 82%);
+  --secondary-light-color: hsl(184, 75%, 65%);
+  --secondary-dark-color: hsl(220, 94%, 47%);
+  --highlight-color: hsl(267, 49%, 45%);
+  --highlight-color-link: hsl(237, 100%, 70%);
+  --highlight-color-link-hover: hsl(237, 100%, 80%);
+
+  --alpha-highlight-color: 267 49% 45%;
+  --alpha-shadow-color: 237 100% 70%;
+
+  --glass-effect__color-dark: hsla(0, 0%, 0%, 0.9);
+
+  /* Light theme */
+
+  --light-theme__main-background-color: hsl(214, 64%, 82%);
+  --light-theme__section-background-color: hsl(214, 64%, 87%);
+  --light-theme__main-txt-color: hsl(233, 36%, 9%);
+  --light-theme__secondary-light-color: hsl(184, 75%, 25%);
+  --light-theme__secondary-dark-color: hsl(220, 94%, 7%);
+  --light-theme__highlight-color: hsl(267, 49%, 65%);
+  --light-theme__highlight-color-link: hsl(237, 100%, 10%);
+  --light-theme__highlight-color-link-hover: hsl(237, 100%, 40%);
+
+  /*  Font  */
+
+  --ff-primary: "Montserrat", sans-serif;
+  --ff-handlee: "Handlee", cursive;
+
+  --fw-400: 400;
+  --fw-500: 500;
+  --fw-600: 600;
+  --fw-700: 700;
+
+  /*  Font size  */
+
+  --fs-300: 0.8125rem;
+  --fs-400: 0.875rem;
+  --fs-500: 0.9375rem;
+  --fs-600: 1rem;
+  --fs-700: 1.875rem;
+  --fs-800: 2rem;
+  --fs-900: 3rem;
+
+  --fs-body: var(--fs-400);
+  --fs-primary-heading: var(--fs-800);
+  --fs-secondary-heading: var(--fs-700);
+  --fs-intro: var(--fs-400);
+  --fs-btn: var(--fs-300);
+
+  --size-100: 0.25rem;
+  --size-200: 0.5rem;
+  --size-300: 0.75rem;
+  --size-400: 1rem;
+  --size-500: 1.5rem;
+  --size-600: 2rem;
+  --size-700: 2.5rem;
+  --size-800: 3rem;
+  --size-900: 3.5rem;
+
+  font-family: var(--ff-primary);
+  font-size: var(--fs-600);
+  line-height: 1.5;
+  font-weight: var(--fw-400);
+
+  color-scheme: light dark;
+  color: var(--main-txt-color);
+  background-color: var(--main-background-color);
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+
+  /*  animation timer */
+
+  --loading-timer: 3s;
+}
+
+@media screen and (min-width: 32em) {
+  :root {
+    --fs-body: var(--fs-500);
+    --fs-primary-heading: var(--fs-900);
+    --fs-secondary-heading: var(--fs-800);
+    --fs-intro: var(--size-500);
+  }
+}
+
+/*  Global  */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html:focus-within {
+  scroll-behavior: smooth;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  font: inherit;
+}
+
+ul,
+ol {
+  list-style: none;
+  text-indent: 0;
+}
+
+html,
+body {
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+img,
+picture,
+svg {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  font-weight: var(--fw-500);
+  color: var(--highlight-color-link);
+  text-decoration: inherit;
+}
+
+a:hover {
+  color: var(--highlight-color-link-hover);
+}
+
+strong {
+  font-weight: var(--fw-600);
+}
+
+body {
+  justify-content: space-between;
+  min-height: 100vh;
+  text-rendering: optimizeSpeed;
+  line-height: 1.5;
+  font-family: var(--ff-primary);
+  font-size: var(--fs-body);
+  color: var(--main-txt-color);
+  align-items: center;
+}
+/*  Scrollbar */
+
+body::-webkit-scrollbar {
+  width: 0.5rem;
+}
+
+body::-webkit-scrollbar-track {
+  background: hsl(var(--alpha-highlight-color) / 0.2);
+}
+
+body::-webkit-scrollbar-thumb {
+  background: hsl(var(--alpha-shadow-color) / 0.2);
+}
+
+body::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--alpha-shadow-color) / 0.4);
+}
+
+/* Remove animations...... User prefered */
+
+@media (prefers-reduced-motion: reduce) {
+  html:focus-within {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto;
+  }
+}
+
+/* Utility classes */
+
+.ff-handlee {
+  font-family: var(--ff-handlee);
+}
+
+.center-text {
+  text-align: center;
+}
+
+.fw-400 {
+  font-weight: var(--fw-400);
+}
+
+.fw-500 {
+  font-weight: var(--fw-500);
+}
+
+.fw-600 {
+  font-weight: var(--fw-600);
+}
+
+.fw-700 {
+  font-weight: var(--fw-700);
+}
+
+.fs-primary__heading {
+  font-size: var(--fs-primary-heading);
+  line-height: 1.1;
+}
+
+.fs-secondary__heading {
+  font-size: var(--fs-secondary-heading);
+  line-height: 1.1;
+}
+
+.flow > *:where(:not(:first-child)) {
+  margin-top: var(--flow-space, 1rem);
+}
+
+.flex {
+  display: flex;
+  gap: var(--gap-space, 1rem);
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-space, 1rem);
+}
+
+.grid {
+  display: grid;
+  gap: var(--gap-space, 1rem);
+}
+
+.uppercase {
+  text-transform: uppercase;
+}
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}

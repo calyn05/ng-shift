@@ -1,0 +1,111 @@
+<h2 class="fs-secondary__heading">Register</h2>
+<form
+  [formGroup]="registerForm"
+  (ngSubmit)="register(email.value, password.value, username.value)"
+>
+  <fieldset class="flex-column flow">
+    <legend>Register form</legend>
+    <div class="input-container flex-column">
+      <div class="form-field">
+        <label for="email">Email</label>
+        <input
+          type="email"
+          #email
+          autocomplete="email"
+          formControlName="email"
+          placeholder="Email"
+        />
+        <div
+          *ngIf="
+            registerForm.controls['email'].invalid &&
+            (registerForm.controls['email'].dirty ||
+              registerForm.controls['email'].touched)
+          "
+          class="error"
+        >
+          <p *ngIf="registerForm.controls['email'].errors?.['required']">
+            Email is required
+          </p>
+          <p *ngIf="registerForm.controls['email'].errors?.['email']">
+            Please enter a valid email
+          </p>
+        </div>
+      </div>
+      <div class="form-field">
+        <label for="username">Username</label>
+        <input
+          type="text"
+          #username
+          autocomplete="username"
+          formControlName="username"
+          placeholder="Username"
+        />
+        <div
+          *ngIf="
+            registerForm.controls['username'].invalid &&
+            (registerForm.controls['username'].dirty ||
+              registerForm.controls['username'].touched)
+          "
+          class="error"
+        >
+          <p *ngIf="registerForm.controls['username'].errors?.['required']">
+            Username is required
+          </p>
+          <span *ngIf="registerForm.controls['username'].errors?.['minlength']">
+            Min 6 characters</span
+          >
+          <p *ngIf="registerForm.controls['username'].errors?.['maxlength']">
+            Max 20 characters
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="form-field">
+      <label for="password">Password</label>
+      <input
+        type="password"
+        #password
+        autocomplete="new-password"
+        formControlName="password"
+        placeholder="Password"
+      />
+      <div
+        *ngIf="
+          registerForm.controls['password'].invalid &&
+          (registerForm.controls['password'].dirty ||
+            registerForm.controls['password'].touched)
+        "
+        class="error"
+      >
+        <p *ngIf="registerForm.controls['password'].errors?.['required']">
+          Password is required
+        </p>
+        <p
+          *ngIf="registerForm.controls['password'].errors?.['minlength'] &&
+           !registerForm.controls['password'].errors?.['pattern']"
+        >
+          Min 6 characters
+        </p>
+        <p *ngIf="registerForm.controls['password'].errors?.['maxlength']">
+          Max 20 characters
+        </p>
+        <p
+          *ngIf="registerForm.controls['password'].errors?.['pattern'] && 
+          !registerForm.controls['password'].errors?.['maxlength']"
+        >
+          Required: uppercase, lowercase, number, special character
+        </p>
+      </div>
+    </div>
+    <!-- <label for="password">Confirm password</label>
+    <input type="password" #confirmPassword />
+    <label for="first name">First name</label>
+    <input type="text" #firstName />
+    <label for="last name">Last name</label>
+    <input type="text" #lastName />
+    <label for="age">Age</label>
+    <input type="number" #age /> -->
+
+    <button type="submit" [disabled]="!registerForm.valid">Sign-up</button>
+  </fieldset>
+</form>

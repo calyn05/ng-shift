@@ -1,0 +1,31 @@
+<h2 class="fs-secondary__heading">Login</h2>
+<form
+  class="flex-column"
+  [formGroup]="loginForm"
+  (ngSubmit)="login(email.value, password.value)"
+>
+  <fieldset class="flex-column">
+    <legend>Login form</legend>
+    <div class="form-field">
+      <label for="email">Email or username</label>
+      <input
+        type="email"
+        #email
+        autocomplete="email"
+        formControlName="email"
+        placeholder="Email or username"
+      />
+    </div>
+    <div class="form-field">
+      <label for="password">Password</label>
+      <input
+        type="password"
+        #password
+        autocomplete="current-password"
+        formControlName="password"
+        placeholder="Password"
+      />
+    </div>
+    <button type="submit" [disabled]="!loginForm.valid">Login</button>
+  </fieldset>
+</form>
