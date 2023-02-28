@@ -47,16 +47,18 @@ label {
   left: 50%;
   transform: translate(-50%, -50%);
   transition: all 0.2s ease-in-out;
+  z-index: -1;
 }
 
 .form-field:active label,
 .form-field:focus-within label,
 .form-field:has(input.ng-dirty) > label {
-  top: -20%;
-  left: 5%;
+  top: -0.5rem;
+  left: 1rem;
   transform: translate(0, 0);
   font-size: 0.8rem;
   color: var(--highlight-color-link-hover);
+  z-index: 0;
 }
 
 legend {
@@ -64,16 +66,28 @@ legend {
 }
 
 .form-field > .error {
-  position: absolute;
-  bottom: -50%;
-  left: 50%;
-  transform: translate(-50%, 10%);
+  width: 100%;
   transition: all 0.2s ease-in-out;
   font-size: 0.725rem;
 }
+/* 
+@media screen and (min-width: 42em) {
+  .form-field > .error {
+    position: absolute;
+    bottom: -50%;
+    left: 50%;
+    transform: translate(-50%, 10%);
+  }
+} */
 
 .error > p {
   width: 100%;
+  margin-top: 0;
+  text-align: center;
+}
+
+.invalid {
+  color: hsl(0, 100%, 50%);
 }
 
 input {
@@ -122,7 +136,38 @@ button:enabled {
 }
 
 @media screen and (max-width: 42em) {
+  fieldset {
+    --flow-space: 0;
+  }
+
   button {
     padding: 0.2rem 1rem;
   }
+
+  p:last-of-type {
+    margin-top: 0;
+  }
+}
+
+p:last-of-type {
+  margin-top: 1rem;
+  text-align: center;
+}
+
+.checkbox-container {
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.checkbox-container > input {
+  max-width: fit-content;
+}
+
+.checkbox-container > label {
+  position: unset;
+  transform: unset;
+  font-size: 0.8rem;
+  color: var(--main-txt-color);
+  z-index: 0;
 }

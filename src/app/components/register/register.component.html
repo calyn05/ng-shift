@@ -1,7 +1,17 @@
 <h2 class="fs-secondary__heading">Register</h2>
 <form
   [formGroup]="registerForm"
-  (ngSubmit)="register(email.value, password.value, username.value)"
+  (ngSubmit)="
+    register(
+      email.value,
+      username.value,
+      password.value,
+      firstName.value,
+      lastName.value,
+      f['age'].value,
+      isAdmin
+    )
+  "
 >
   <fieldset class="flex-column flow">
     <legend>Register form</legend>
@@ -24,13 +34,14 @@
           class="error"
         >
           <p *ngIf="registerForm.controls['email'].errors?.['required']">
-            Email is required
+            Required
           </p>
           <p *ngIf="registerForm.controls['email'].errors?.['email']">
-            Please enter a valid email
+            Enter a valid email
           </p>
         </div>
       </div>
+
       <div class="form-field">
         <label for="username">Username</label>
         <input
@@ -49,63 +60,172 @@
           class="error"
         >
           <p *ngIf="registerForm.controls['username'].errors?.['required']">
-            Username is required
+            Required
           </p>
-          <span *ngIf="registerForm.controls['username'].errors?.['minlength']">
-            Min 6 characters</span
-          >
+          <p *ngIf="registerForm.controls['username'].errors?.['minlength']">
+            Min 6 characters
+          </p>
           <p *ngIf="registerForm.controls['username'].errors?.['maxlength']">
             Max 20 characters
           </p>
         </div>
       </div>
     </div>
-    <div class="form-field">
-      <label for="password">Password</label>
-      <input
-        type="password"
-        #password
-        autocomplete="new-password"
-        formControlName="password"
-        placeholder="Password"
-      />
-      <div
-        *ngIf="
-          registerForm.controls['password'].invalid &&
-          (registerForm.controls['password'].dirty ||
-            registerForm.controls['password'].touched)
-        "
-        class="error"
-      >
-        <p *ngIf="registerForm.controls['password'].errors?.['required']">
-          Password is required
-        </p>
-        <p
-          *ngIf="registerForm.controls['password'].errors?.['minlength'] &&
-           !registerForm.controls['password'].errors?.['pattern']"
+
+    <div class="input-container flex-column">
+      <div class="form-field">
+        <label for="password">Password</label>
+        <input
+          type="password"
+          #password
+          autocomplete="new-password"
+          formControlName="password"
+          placeholder="Password"
+        />
+        <div
+          *ngIf="
+            !passwordValid && (f['password'].dirty || f['password'].touched)
+          "
+          class="error"
         >
-          Min 6 characters
-        </p>
-        <p *ngIf="registerForm.controls['password'].errors?.['maxlength']">
-          Max 20 characters
-        </p>
-        <p
-          *ngIf="registerForm.controls['password'].errors?.['pattern'] && 
-          !registerForm.controls['password'].errors?.['maxlength']"
+          <p
+            *ngIf="!requireValid"
+            [class.invalid]="!requireValid && f['password'].dirty"
+          >
+            Required
+          </p>
+          <p *ngIf="!minLengthValid">Min 6 characters</p>
+          <p *ngIf="!maxLengthValid">Max 20 characters</p>
+          <p *ngIf="!hasNumberValid">At least 1 number</p>
+          <p *ngIf="!hasCapitalCaseValid">At least 1 uppercase</p>
+          <p *ngIf="!hasSmallCaseValid">At least 1 lowercase</p>
+          <p *ngIf="!hasSpecialCharactersValid">At least 1 special character</p>
+        </div>
+      </div>
+
+      <div class="form-field">
+        <label for="password">Confirm password</label>
+        <input
+          type="password"
+          #confirmPassword
+          autocomplete="new-password"
+          formControlName="confirmPassword"
+          placeholder="Confirm password"
+        />
+        <div
+          *ngIf="
+            !confirmPasswordValid &&
+            (f['confirmPassword'].dirty || f['confirmPassword'].touched)
+          "
+          class="error"
         >
-          Required: uppercase, lowercase, number, special character
-        </p>
+          <p
+            *ngIf="f['confirmPassword'].errors?.['required']"
+            [class.invalid]="!requireValid && f['confirmPassword'].dirty"
+          >
+            Required
+          </p>
+          <p *ngIf="f['confirmPassword'].errors?.['minLength']">
+            Min 6 characters
+          </p>
+          <p
+            *ngIf="
+            f['confirmPassword'].errors?.['misMatch'] &&
+            f['confirmPassword'].dirty
+            "
+            [class.invalid]="true"
+          >
+            Passwords must match
+          </p>
+        </div>
       </div>
     </div>
-    <!-- <label for="password">Confirm password</label>
-    <input type="password" #confirmPassword />
-    <label for="first name">First name</label>
-    <input type="text" #firstName />
-    <label for="last name">Last name</label>
-    <input type="text" #lastName />
-    <label for="age">Age</label>
-    <input type="number" #age /> -->
 
+    <div class="input-container flex-column">
+      <div class="form-field">
+        <label for="first name">First name</label>
+        <input
+          type="text"
+          #firstName
+          autocomplete="given-name"
+          formControlName="firstName"
+          placeholder="First name"
+        />
+        <div
+          *ngIf="
+            !firstNameValid && (f['firstName'].dirty || f['firstName'].touched)
+          "
+          class="error"
+        >
+          <p *ngIf="f['firstName'].errors?.['required']">Required</p>
+          <p *ngIf="f['firstName'].errors?.['minlength']">Min 2 characters</p>
+          <p *ngIf="f['firstName'].errors?.['maxlength']">Max 20 characters</p>
+        </div>
+      </div>
+      <div class="form-field">
+        <label for="last name">Last name</label>
+        <input
+          type="text"
+          #lastName
+          autocomplete="family-name"
+          formControlName="lastName"
+          placeholder="Last name"
+        />
+        <div
+          *ngIf="
+            !lastNameValid && (f['lastName'].dirty || f['lastName'].touched)
+          "
+          class="error"
+        >
+          <p *ngIf="f['lastName'].errors?.['required']">Required</p>
+          <p *ngIf="f['lastName'].errors?.['minlength']">Min 2 characters</p>
+          <p *ngIf="f['lastName'].errors?.['maxlength']">Max 20 characters</p>
+        </div>
+      </div>
+      <div class="form-field">
+        <label for="age">Age</label>
+        <input
+          type="number"
+          autocomplete="age"
+          formControlName="age"
+          placeholder="Age"
+        />
+        <div
+          *ngIf="!ageValid && (f['age'].dirty || f['age'].touched)"
+          class="error"
+        >
+          <p *ngIf="f['age'].errors?.['required']">Required</p>
+          <p *ngIf="f['age'].errors?.['min']">Min 18 years</p>
+          <p *ngIf="f['age'].errors?.['max']">Max 130 years</p>
+        </div>
+      </div>
+    </div>
+    <div class="checkbox-container flex">
+      <input type="checkbox" #admin formControlName="isAdmin" />
+      <label for="admin">Register as Admin</label>
+    </div>
+    <div *ngIf="isAdmin" class="input-container">
+      <div class="form-field">
+        <label for="code">Code</label>
+        <input
+          type="text"
+          #code
+          autocomplete="code"
+          formControlName="code"
+          placeholder="Code"
+        />
+        <div
+          *ngIf="!codeValid && (f['code'].dirty || f['code'].touched)"
+          class="error"
+        >
+          <p *ngIf="f['code'].errors?.['required']">Required</p>
+          <p *ngIf="f['code'].errors?.['minlength']">Must have 6 characters</p>
+          <p *ngIf="f['code'].errors?.['maxlength']">Must have 6 characters</p>
+        </div>
+      </div>
+    </div>
     <button type="submit" [disabled]="!registerForm.valid">Sign-up</button>
   </fieldset>
 </form>
+
+<p>Already registered? Login <a [routerLink]="'/login'">here!</a></p>

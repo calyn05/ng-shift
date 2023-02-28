@@ -4,16 +4,16 @@
   [formGroup]="loginForm"
   (ngSubmit)="login(email.value, password.value)"
 >
-  <fieldset class="flex-column">
+  <fieldset class="flex-column flow">
     <legend>Login form</legend>
     <div class="form-field">
-      <label for="email">Email or username</label>
+      <label for="email">Username</label>
       <input
         type="email"
         #email
         autocomplete="email"
         formControlName="email"
-        placeholder="Email or username"
+        placeholder="Username"
       />
     </div>
     <div class="form-field">
@@ -29,3 +29,5 @@
     <button type="submit" [disabled]="!loginForm.valid">Login</button>
   </fieldset>
 </form>
+
+<p>Not registered yet? Sign-up <a [routerLink]="'/register'">here!</a></p>
