@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { PasswordValidators } from 'src/app/shared/password-match';
@@ -8,8 +8,11 @@ import { PasswordValidators } from 'src/app/shared/password-match';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css'],
 })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent implements OnInit, OnDestroy {
   registerForm!: FormGroup;
+
+  @Input() code!: FormControl;
+
   constructor(private auth: AuthService) {}
 
   ngOnInit(): void {
@@ -85,6 +88,8 @@ export class RegisterComponent implements OnInit {
     });
   }
 
+  ngOnDestroy(): void {}
+
   // getters for form controls
 
   get f() {
@@ -156,7 +161,8 @@ export class RegisterComponent implements OnInit {
     firstName: string,
     lastName: string,
     age: number,
-    isAdmin: boolean
+    isAdmin: boolean,
+    code: string
   ) {
     this.auth.register(
       email,
@@ -165,20 +171,10 @@ export class RegisterComponent implements OnInit {
       firstName,
       lastName,
       age,
-      isAdmin
+      isAdmin,
+      code
     );
   }
 
-  logout() {
-    this.auth.logout();
-  }
-
-  // store user to firestore
-
-  // register(email: string, password: string) {
-  //   createUserWithEmailAndPassword(this.auth, email, password).then(
-  //     (res) => console.log(res),
-  //     (err) => console.log(err)
-  //   );
-  // }
+  getErrorMessages() {}
 }

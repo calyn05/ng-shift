@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { PasswordValidators } from 'src/app/shared/password-match';
 import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({
@@ -15,12 +16,23 @@ export class LoginComponent {
   constructor(private auth: AuthService) {}
 
   loginForm = new FormGroup({
-    email: new FormControl('', [Validators.required, Validators.email]),
+    email: new FormControl('', [Validators.required]),
     password: new FormControl('', [
       Validators.required,
       Validators.minLength(6),
       Validators.maxLength(20),
-      Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9]+$'),
+      PasswordValidators.patternValidator(new RegExp('(?=.*[0-9])'), {
+        hasNumber: true,
+      }),
+      PasswordValidators.patternValidator(new RegExp('(?=.*[A-Z])'), {
+        hasCapitalCase: true,
+      }),
+      PasswordValidators.patternValidator(new RegExp('(?=.*[a-z])'), {
+        hasSmallCase: true,
+      }),
+      PasswordValidators.patternValidator(new RegExp('(?=.*[!@#$%^&*()_+])'), {
+        hasSpecialCharacters: true,
+      }),
     ]),
   });
 

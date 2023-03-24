@@ -5,6 +5,7 @@ import {
   NavigationStart,
   Event as NavigationEvent,
 } from '@angular/router';
+import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -22,7 +23,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   url!: string;
 
-  constructor(private route: ActivatedRoute, private router: Router) {
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private auth: AuthService
+  ) {
     this.router.events.subscribe((event: NavigationEvent) => {
       this.events.push(event);
       if (event instanceof NavigationStart) {
@@ -37,5 +42,12 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     console.log('Header component destroyed');
+  }
+
+  logout() {
+    this.auth.logout();
+    console.log('Logout');
+    localStorage.removeItem('token');
+    this.router.navigate(['/']);
   }
 }

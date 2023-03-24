@@ -9,7 +9,8 @@
       firstName.value,
       lastName.value,
       f['age'].value,
-      isAdmin
+      isAdmin,
+      f['code'].value
     )
   "
 >
@@ -189,6 +190,8 @@
           autocomplete="age"
           formControlName="age"
           placeholder="Age"
+          min="18"
+          max="130"
         />
         <div
           *ngIf="!ageValid && (f['age'].dirty || f['age'].touched)"
@@ -206,13 +209,13 @@
     </div>
     <div *ngIf="isAdmin" class="input-container">
       <div class="form-field">
-        <label for="code">Code</label>
+        <label for="code">Admin Code</label>
         <input
           type="text"
           #code
           autocomplete="code"
           formControlName="code"
-          placeholder="Code"
+          placeholder="Admin Code"
         />
         <div
           *ngIf="!codeValid && (f['code'].dirty || f['code'].touched)"
