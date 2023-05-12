@@ -7,3 +7,15 @@ fieldset {
     max-width: 100%;
   }
 }
+
+.forgot-pass {
+  margin-top: 0.3rem !important;
+  font-size: clamp(0.625rem, 1vw, 0.9rem);
+  color: var(--main-txt-color);
+  width: 100%;
+  text-align: right !important;
+}
+
+button {
+  margin-top: 0 !important;
+}

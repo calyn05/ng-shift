@@ -25,9 +25,15 @@
         formControlName="password"
         placeholder="Password"
       />
+      <app-show-password></app-show-password>
+      <p class="forgot-pass">
+        Forgot password? <a routerLink="/forgot-password">Reset</a>
+      </p>
     </div>
     <button type="submit" [disabled]="!loginForm.valid">Login</button>
   </fieldset>
 </form>
 
-<p>Not registered yet? Sign-up <a [routerLink]="'/register'">here!</a></p>
+<p class="guide-paragraph">
+  Not registered yet? Sign-up <a [routerLink]="'/register'">here!</a>
+</p>

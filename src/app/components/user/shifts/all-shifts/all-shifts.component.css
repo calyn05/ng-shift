@@ -1,0 +1,119 @@
+.shift-container {
+  justify-content: center;
+  margin-bottom: 1em;
+  border-radius: 10%;
+  padding: 1rem;
+  overflow-x: scroll;
+  margin-bottom: 2rem;
+}
+
+@media screen and (min-width: 42em) {
+  .shift-container {
+    justify-content: center;
+    align-items: center;
+    overflow-x: unset;
+  }
+}
+
+table {
+  width: 95%;
+}
+
+th {
+  text-align: center;
+  padding: 0.5em;
+  border: 1px solid var(--main-txt-color);
+  border-radius: 10%;
+}
+
+td {
+  text-align: center;
+  padding: 0.5em;
+  border: 1px solid var(--main-txt-color);
+  border-radius: 10%;
+  cursor: pointer;
+}
+
+tr {
+  border: 1px solid var(--main-txt-color);
+}
+
+tbody > tr {
+  background-color: var(--section-background-color);
+}
+
+tr > th,
+tr > td {
+  border-color: var(--section-background-color);
+}
+
+tbody > tr:hover {
+  background-color: hsl(var(--alpha-shadow-color) / 0.4);
+}
+
+tbody > tr:hover > td {
+  border-color: hsl(var(--alpha-shadow-color) / 0.4);
+}
+
+fieldset {
+  padding: 0.2rem 1rem;
+  border-bottom: none;
+  border-left: none;
+  border-right: none;
+  border-radius: 10%;
+  border-color: var(--main-txt-color);
+}
+
+legend {
+  padding-inline: 0.3rem;
+}
+
+.search-container {
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1em;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+input {
+  border: 1px solid var(--main-txt-color);
+  border-radius: 10%;
+  padding: 0.2em 0.5em;
+  margin-right: 1em;
+  background-color: var(--section-background-color);
+}
+
+button {
+  background: var(--main-background-color);
+  color: var(--main-txt-color);
+  border: none;
+  padding-inline: 1rem;
+  border-radius: 2vmin;
+  font-size: var(--fs-600);
+  font-weight: var(--fw-700);
+  transition: all 0.2s ease;
+  cursor: pointer;
+  border-bottom: 1px solid var(--main-txt-color);
+}
+
+button:hover {
+  border-bottom: 1px solid #00ff00;
+}
+
+@media screen and (max-width: 30em) {
+  fieldset {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+input {
+  border: 1px solid hsl(var(--alpha-shadow-color) / 0.4);
+}
+
+input:focus {
+  outline: 1px solid hsl(var(--alpha-shadow-color) / 0.5) !important;
+}

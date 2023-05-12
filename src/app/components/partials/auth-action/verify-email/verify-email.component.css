@@ -1,0 +1,10 @@
+.input-container {
+  flex-direction: column !important;
+}
+
+fieldset {
+  position: relative;
+  align-items: center;
+  justify-content: space-evenly;
+  max-width: 500px;
+}

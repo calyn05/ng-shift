@@ -1,0 +1,61 @@
+<section>
+  <h1 class="fs-secondary__heading">
+    {{ dbUser.username | titlecase }} Profile
+  </h1>
+  <div class="flex-column motivation-container">
+    <h2 class="fs-secondary__heading">Road to $1million</h2>
+    <p>
+      Gained: <span>{{ totalIncome | currency }}</span>
+    </p>
+    <mat-progress-bar
+      mode="buffer"
+      [value]="(totalIncome / 1000000) * 100"
+      [bufferValue]="((totalIncome + incomeFutureShifts) / 1000000) * 100"
+      color="warn"
+    ></mat-progress-bar>
+    <p>
+      Income from future Shifts:
+      <span>{{ incomeFutureShifts | currency }}</span>
+    </p>
+  </div>
+</section>
+
+<section class="flex-column edit-profile_section">
+  <h2 class="fs-secondary__heading">Personal data</h2>
+  <div class="data-container flex-column flow">
+    <div class="data-container__info flow">
+      <p class="flex">
+        Account created at: <span>{{ createdAt }}</span>
+      </p>
+      <p class="flex">
+        Email: <span>{{ email }}</span> <a routerLink="edit/email">Change</a>
+      </p>
+      <p class="flex">
+        Email verified: <span>{{ emailVerified }}</span>
+        <a *ngIf="!emailVerified" routerLink="/verify-email">Verify email</a>
+      </p>
+      <p class="flex">
+        Name:
+        <span
+          >{{ dbUser.firstName | titlecase }}
+          {{ dbUser.lastName | titlecase }}</span
+        >
+        <a routerLink="edit/name">Change</a>
+      </p>
+      <p class="flex">
+        Username: <span>{{ dbUser.username }}</span>
+      </p>
+      <p class="flex">
+        Password: <span>********</span> <a routerLink="edit/password">Change</a>
+      </p>
+      <p class="flex">
+        Age: <span>{{ dbUser.age }}</span> <a routerLink="edit/age">Change</a>
+      </p>
+    </div>
+    <div class="chart-container">
+      <p *ngIf="pastWeekShifts.length === 0">0h worked last week</p>
+      <canvas id="hoursChart">{{ chart }}</canvas>
+    </div>
+  </div>
+  <button class="delete-btn" (click)="openDialog()">Delete account</button>
+</section>

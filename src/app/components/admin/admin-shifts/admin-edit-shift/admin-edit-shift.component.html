@@ -1,0 +1,50 @@
+<h1 class="fs-secondary__heading">Edit shift</h1>
+<h2>Shift #### completed by worker $$$$</h2>
+<form>
+  <fieldset class="flex-column flow">
+    <a class="cancel" routerLink="/admin/shifts">x</a>
+    <legend>Shift details</legend>
+    <div class="input-container flex-column">
+      <div class="form-field">
+        <label for="startDate">Start date</label>
+        <input type="date" />
+      </div>
+      <div class="form-field">
+        <label for="startTime">Start time</label>
+        <input type="time" />
+      </div>
+      <div class="form-field">
+        <label for="endDate">End date</label>
+        <input type="date" />
+      </div>
+      <div class="form-field">
+        <label for="endTime">End time</label>
+        <input type="time" />
+      </div>
+    </div>
+    <div class="input-container flex-column">
+      <div class="form-field flex">
+        <label for="hourlyWage">Wage / h</label>
+        <input type="number" placeholder="Wage / h" />
+      </div>
+      <div class="form-field">
+        <label for="location">Location</label>
+        <input type="text" placeholder="Location" />
+      </div>
+    </div>
+    <div class="input-container flex-column">
+      <div class="form-field">
+        <label for="name">Unique name</label>
+        <input type="text" placeholder="Unique name" />
+      </div>
+    </div>
+    <div class="input-container flex-column">
+      <div class="form-field">
+        <label for="description">Description</label>
+        <textarea cols="50" placeholder="Description"></textarea>
+      </div>
+    </div>
+    <p class="reset">Made a mistake? <a>Reset form</a></p>
+  </fieldset>
+  <button type="submit" disabled>Update</button>
+</form>

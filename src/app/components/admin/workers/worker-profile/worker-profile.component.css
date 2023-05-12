@@ -1,0 +1,38 @@
+.close-button {
+  position: absolute;
+  top: -50%;
+  right: 1rem;
+  padding: 0.1rem 0.7rem;
+  font-size: var(--fs-600);
+  border: none;
+  border-radius: 2vmin;
+  box-shadow: 0 0 0.5rem 0.1rem var(--section-background-color);
+  cursor: pointer;
+  background-color: var(--section-background-color);
+}
+
+.close-button:hover {
+  background-color: hsla(0, 100%, 20%, 0.9);
+}
+
+.header-container {
+  position: relative;
+  width: 100%;
+  align-items: center;
+  justify-content: space-around;
+  padding: 1rem;
+  background-color: var(--section-background-color);
+}
+
+h2 {
+  margin: 0 !important;
+}
+
+.delete-button {
+  background-color: hsl(0, 92%, 25%);
+  border-bottom-color: hsl(0, 0%, 100%) !important;
+}
+
+.delete-button:hover {
+  background-color: hsl(0, 95%, 36%);
+}

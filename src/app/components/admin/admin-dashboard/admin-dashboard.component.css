@@ -1,0 +1,25 @@
+h2 {
+  text-indent: 1rem;
+  margin: 1rem 0;
+}
+
+.earnings-chart__container {
+  background-color: var(--section-background-color);
+  padding: 1rem;
+}
+
+h3 {
+  text-align: center;
+  margin: 1rem 0;
+}
+
+p {
+  text-align: center;
+  margin: 1rem 0;
+}
+
+.admin-earnings_chart__container {
+  padding-top: 0.5rem;
+  background-color: var(--section-background-color);
+  margin-bottom: 3em;
+}

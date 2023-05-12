@@ -1,0 +1,9 @@
+.shifts-chart__container {
+  background-color: var(--section-background-color);
+  padding: 1rem;
+}
+
+h3 {
+  text-align: center;
+  margin: 1rem 0;
+}

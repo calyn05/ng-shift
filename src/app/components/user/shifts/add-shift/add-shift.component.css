@@ -1,0 +1,85 @@
+h1 {
+  text-indent: 2rem;
+  margin: 1rem 0;
+}
+
+form {
+  margin-bottom: 2.5rem;
+}
+
+mat-icon {
+  position: absolute;
+  top: -0.1rem;
+  right: 0.7rem;
+  cursor: pointer;
+  background-color: var(--main-background-color);
+  border-radius: 50%;
+}
+
+mat-icon:hover {
+  background-color: var(--highlight-color);
+}
+
+textarea {
+  width: 100%;
+  height: 7rem;
+  padding: 0.5rem;
+  border: none;
+  border-bottom: 1px solid var(--main-txt-color);
+  border-radius: 2vmin;
+  background-color: var(--main-background-color);
+  box-shadow: 0 0 0.5rem 0.1rem var(--section-background-color);
+  text-align: center;
+}
+
+textarea:active,
+textarea:focus {
+  outline: none;
+  border-bottom: 1px solid var(--highlight-color-link-hover);
+}
+
+fieldset {
+  position: relative;
+}
+
+.reset {
+  align-self: flex-end;
+  margin-right: 0.4em;
+}
+
+.reset > a {
+  cursor: pointer;
+}
+
+input > .ng-pending {
+  border-bottom: 1px solid orange;
+}
+
+.location-container {
+  position: relative;
+}
+
+.dropdown-select {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  height: fit-content;
+  max-height: 10rem;
+  cursor: pointer;
+  overflow: auto;
+  z-index: 1;
+}
+
+.dropdown-select__item {
+  text-align: center;
+  padding: 0.1rem;
+  border-bottom: 1px solid var(--main-txt-color);
+  background-color: var(--main-background-color);
+  border-radius: 2vmin;
+  margin-top: 0.2rem;
+}
+
+.dropdown-select__item:hover {
+  background-color: var(--highlight-color-link);
+}

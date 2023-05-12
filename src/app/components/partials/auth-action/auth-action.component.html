@@ -1,0 +1,15 @@
+<ng-container [ngSwitch]="mode">
+  <ng-container *ngSwitchCase="'resetPassword'">
+    <app-reset-password></app-reset-password>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="'verifyEmail'">
+    <app-verify-email></app-verify-email>
+  </ng-container>
+
+  <ng-container *ngSwitchDefault>
+    <div>
+      <h1>You have no pending auth actions</h1>
+    </div>
+  </ng-container>
+</ng-container>

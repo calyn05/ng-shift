@@ -1,0 +1,75 @@
+.dashboard-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-right: 2rem;
+}
+
+h1 {
+  text-indent: 2rem;
+  margin: 1rem 0;
+}
+
+h2 {
+  font-size: 1.2em;
+  margin-bottom: 0.5em;
+  margin-top: 0.5em;
+  border-bottom: 1px solid var(--main-txt-color);
+  text-align: center;
+}
+
+button {
+  background: var(--main-background-color);
+  color: var(--main-txt-color);
+  border: none;
+  padding-inline: 1rem;
+  border-radius: 2vmin;
+  font-size: var(--fs-600);
+  font-weight: var(--fw-700);
+  transition: all 0.2s ease;
+  cursor: pointer;
+  border-bottom: 1px solid var(--main-txt-color);
+}
+
+button:hover {
+  border-bottom: 1px solid lime;
+}
+
+.highest-earnings__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 1rem 0;
+  margin-bottom: 2em;
+  width: 100%;
+}
+
+.highest-earnings__month > h3,
+.highest-earnings__earnings > h3 {
+  border-bottom: 1px solid lime;
+  border-radius: 10%;
+  text-align: center;
+}
+
+.highest-earnings__month > p,
+.highest-earnings__earnings > p {
+  text-align: center;
+  margin-top: 0.3rem;
+}
+
+.highest-earnings__best__month {
+  background-color: var(--section-background-color);
+  border-radius: 0 10%;
+  padding: 1rem 3rem;
+}
+
+app-chart {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+app-past-shifts {
+  margin-bottom: 2rem;
+}

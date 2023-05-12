@@ -1,0 +1,24 @@
+<div class="flex dashboard-head">
+  <h1 class="fs-secondary__heading">Stats</h1>
+  <button routerLink="/add-shift">Add shift</button>
+</div>
+<app-upcoming-shift></app-upcoming-shift>
+<h2>Earnings last 12 months</h2>
+<div class="highest-earnings__container flex">
+  <div class="highest-earnings__best__month flex" *ngIf="earningsPerMonth">
+    <div class="highest-earnings__month">
+      <h3>Best Month</h3>
+      <p>
+        <b> {{ bestMonth().month | uppercase }}</b>
+      </p>
+    </div>
+    <div class="highest-earnings__earnings">
+      <h3>Earnings</h3>
+      <p>
+        <b> {{ bestMonth().earnings | currency }}</b>
+      </p>
+    </div>
+  </div>
+  <app-chart></app-chart>
+</div>
+<app-past-shifts></app-past-shifts>

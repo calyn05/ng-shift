@@ -1,7 +1,10 @@
 import { Component, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { AuthService } from 'src/app/shared/services/auth.service';
-import { PasswordValidators } from 'src/app/shared/password-match';
+import { PasswordValidators } from 'src/app/shared/validators/password-match';
+
+import { LoaderService } from 'src/app/shared/services/loader.service';
 
 @Component({
   selector: 'app-register',
@@ -13,7 +16,9 @@ export class RegisterComponent implements OnInit, OnDestroy {
 
   @Input() code!: FormControl;
 
-  constructor(private auth: AuthService) {}
+  isSubmitted: boolean = false;
+
+  constructor(private auth: AuthService, private _loader: LoaderService) {}
 
   ngOnInit(): void {
     this.registerForm = new FormGroup(
@@ -86,6 +91,18 @@ export class RegisterComponent implements OnInit, OnDestroy {
       }
       this.registerForm.get('code')?.updateValueAndValidity();
     });
+
+    this.registerForm.valueChanges.subscribe((value) => {
+      this.canExit();
+    });
+  }
+
+  canExit(): boolean {
+    if (this.registerForm.dirty && this.isSubmitted === false) {
+      return false;
+    } else {
+      return true;
+    }
   }
 
   ngOnDestroy(): void {}
@@ -154,7 +171,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
     return this.registerForm.controls['code'].valid === null;
   }
 
-  register(
+  async register(
     email: string,
     username: string,
     password: string,
@@ -164,6 +181,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
     isAdmin: boolean,
     code: string
   ) {
+    this._loader.setLoading(true);
     this.auth.register(
       email,
       username,
@@ -174,7 +192,20 @@ export class RegisterComponent implements OnInit, OnDestroy {
       isAdmin,
       code
     );
+    this.isSubmitted = true;
   }
 
-  getErrorMessages() {}
+  patchValues() {
+    this.registerForm.setValue({
+      email: 'john@codes.com ',
+      username: 'johndoe',
+      password: '12Saaa@',
+      confirmPassword: '12Saaa@',
+      firstName: 'John',
+      lastName: 'Codes',
+      age: 20,
+      isAdmin: false,
+      code: 'admin1',
+    });
+  }
 }

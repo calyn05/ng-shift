@@ -1,0 +1,65 @@
+<div class="flex header-container">
+  <h1 class="fs-secondary__heading">Shifts</h1>
+  <select [(ngModel)]="searchBy">
+    <option value="search_by_date">Search by date</option>
+    <option value="search_by_worker">Search by worker</option>
+    <option value="search_by_location">Search by location</option>
+  </select>
+</div>
+<div class="search-container flex">
+  <ng-container [ngSwitch]="searchBy">
+    <form *ngSwitchDefault>
+      <fieldset>
+        <legend>Search by date</legend>
+        <span>From: </span>
+        <input type="date" />
+        <span>to: </span>
+        <input type="date" />
+        <button type="submit">Search</button>
+      </fieldset>
+    </form>
+
+    <form *ngSwitchCase="'search_by_worker'">
+      <fieldset>
+        <legend>Search by worker</legend>
+        <input type="text" />
+        <button type="submit">Search</button>
+      </fieldset>
+    </form>
+
+    <form *ngSwitchCase="'search_by_location'">
+      <fieldset>
+        <legend>Search by location</legend>
+        <input type="text" />
+        <button type="submit">Search</button>
+      </fieldset>
+    </form>
+  </ng-container>
+</div>
+
+<div class="shift-container">
+  <table>
+    <thead>
+      <tr>
+        <th>Worker</th>
+        <th>Shift date</th>
+        <th>Shift start</th>
+        <th>Shift end</th>
+        <th>Price / h</th>
+        <th>Shift location</th>
+        <th>Profit</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>shift.worker</td>
+        <td>shift.date</td>
+        <td>shift.start</td>
+        <td>shift.end</td>
+        <td>shift price / h</td>
+        <td>shift.location</td>
+        <td>shift.wage</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

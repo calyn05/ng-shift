@@ -49,8 +49,8 @@
   --fs-900: 3rem;
 
   --fs-body: var(--fs-400);
-  --fs-primary-heading: var(--fs-800);
-  --fs-secondary-heading: var(--fs-700);
+  --fs-primary-heading: var(--fs-700);
+  --fs-secondary-heading: var(--fs-600);
   --fs-intro: var(--fs-400);
   --fs-btn: var(--fs-300);
 
@@ -265,7 +265,45 @@ html,
 body {
   height: 100%;
 }
+
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.error-snackbar {
+  --mdc-snackbar-container-color: #d61d1df8 !important;
+  --mat-mdc-snack-bar-button-color: #fff !important;
+  --mdc-snackbar-action-color: #fff !important;
+}
+
+.success-snackbar {
+  --mdc-snackbar-container-color: #4caf50e5 !important;
+  --mat-mdc-snack-bar-button-color: #fff !important;
+  --mdc-snackbar-action-color: #fff !important;
+}
+
+.info-snackbar {
+  --mdc-snackbar-container-color: var(--section-background-color) !important;
+  --mat-mdc-snack-bar-button-color: #fff !important;
+  --mdc-snackbar-action-color: #fff !important;
+}
+
+.mat-mdc-dialog-container {
+  --mdc-dialog-container-color: var(--section-background-color);
+  --mdc-dialog-with-divider-divider-color: rgba(0, 0, 0, 0.12);
+  --mdc-dialog-subhead-color: var(--highlight-color-link-hover);
+  --mdc-dialog-supporting-text-color: var(--main-txt-color);
+}
+
+.mat-mdc-button.mat-primary {
+  --mdc-text-button-label-text-color: var(--main-txt-color);
+}
+
+.mat-mdc-button:not(:disabled) {
+  color: var(--main-txt-color);
+}
+
+.cdk-overlay-dark-backdrop {
+  background: rgb(0 0 0 / 63%);
 }

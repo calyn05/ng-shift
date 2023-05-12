@@ -1,0 +1,49 @@
+<div class="header-container flex">
+  <h1 class="fs-secondary__heading">Username shifts</h1>
+  <a routerLink="../" class="close-button"><span>X</span></a>
+</div>
+<div class="search-container flex">
+  <form>
+    <fieldset>
+      <legend>Search by date</legend>
+      <span>From: </span>
+      <input type="date" />
+      <span>to: </span>
+      <input type="date" />
+      <button type="submit">Search</button>
+    </fieldset>
+  </form>
+
+  <form>
+    <fieldset>
+      <legend>Search by location</legend>
+      <input type="text" />
+      <button type="submit">Search</button>
+    </fieldset>
+  </form>
+</div>
+
+<div class="shift-container">
+  <table>
+    <thead>
+      <tr>
+        <th>Shift date</th>
+        <th>Shift start</th>
+        <th>Shift end</th>
+        <th>Price / h</th>
+        <th>Shift location</th>
+        <th>Profit</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>shift.date</td>
+        <td>shift.start</td>
+        <td>shift.end</td>
+        <td>shift price / h</td>
+        <td>shift.location</td>
+        <td>Profit</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

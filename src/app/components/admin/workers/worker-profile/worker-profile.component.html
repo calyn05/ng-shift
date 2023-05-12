@@ -1,0 +1,115 @@
+<h1 class="fs-secondary__heading">Profile</h1>
+<div class="header-container flex">
+  <h2 class="fs-secondary__heading">John Doe</h2>
+  <a routerLink="../../workers" class="close-button"><span>X</span></a>
+  <button type="button" routerLink="./shifts">Shifts</button>
+</div>
+<form [formGroup]="workerProfileForm">
+  <button
+    type="button"
+    (click)="enableEdit()"
+    [disabled]="editables.length !== 0"
+  >
+    Edit profile
+  </button>
+  <fieldset class="flex-column flow">
+    <legend>Profile details</legend>
+    <div class="input-container flex-column">
+      <div class="form-field">
+        <label for="email">Email</label>
+        <input
+          class="editable"
+          type="email"
+          #email
+          autocomplete="email"
+          placeholder="Email"
+          disabled
+        />
+      </div>
+
+      <div class="form-field">
+        <label for="username">Username</label>
+        <input
+          type="text"
+          #username
+          autocomplete="username"
+          placeholder="Username"
+          disabled
+        />
+      </div>
+    </div>
+
+    <div class="input-container flex-column">
+      <div class="form-field">
+        <label for="password">Password</label>
+        <input
+          class="editable"
+          type="password"
+          #password
+          autocomplete="new-password"
+          placeholder="Password"
+          disabled
+        />
+      </div>
+
+      <div class="form-field">
+        <label for="password">Confirm password</label>
+        <input
+          class="editable"
+          type="password"
+          #confirmPassword
+          autocomplete="new-password"
+          placeholder="Confirm password"
+          disabled
+        />
+      </div>
+    </div>
+
+    <div class="input-container flex-column">
+      <div class="form-field">
+        <label for="first name">First name</label>
+        <input
+          class="editable"
+          type="text"
+          #firstName
+          autocomplete="given-name"
+          placeholder="First name"
+          disabled
+        />
+      </div>
+      <div class="form-field">
+        <label for="last name">Last name</label>
+        <input
+          class="editable"
+          type="text"
+          #lastName
+          autocomplete="family-name"
+          placeholder="Last name"
+          disabled
+        />
+      </div>
+      <div class="form-field">
+        <label for="age">Age</label>
+        <input
+          class="editable"
+          type="number"
+          autocomplete="age"
+          placeholder="Age"
+          min="18"
+          max="130"
+          disabled
+        />
+      </div>
+    </div>
+
+    <p class="reset">
+      Don't want to update? <a (click)="disableEdit()">Cancel</a>
+    </p>
+  </fieldset>
+  <button type="submit" *ngIf="editables.length" disabled="!form.valid">
+    Update profile
+  </button>
+  <button type="submit" *ngIf="!editables.length" class="delete-button">
+    Delete profile
+  </button>
+</form>

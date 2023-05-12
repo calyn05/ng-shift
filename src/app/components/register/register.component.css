@@ -149,9 +149,10 @@ button:enabled {
   }
 }
 
-p:last-of-type {
+.guide-paragraph {
   margin-top: 1rem;
   text-align: center;
+  margin-bottom: 2rem;
 }
 
 .checkbox-container {

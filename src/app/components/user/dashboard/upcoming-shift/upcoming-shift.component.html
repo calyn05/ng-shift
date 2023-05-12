@@ -1,0 +1,30 @@
+<h3>Upcoming shift in {{ nextShift?.location | uppercase }}</h3>
+<div class="shift-container flex-column">
+  <table>
+    <thead>
+      <tr>
+        <th>Shift date</th>
+        <th>Start time</th>
+        <th>End time</th>
+        <th>Wage / h</th>
+        <th>Location</th>
+        <th>Income</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        *ngIf="nextShift !== undefined"
+        (click)="setShiftToEdit(editShift)"
+        routerLink="/edit/{{ nextShift?.uniqueName }}"
+      >
+        <td>{{ nextShift?.startDate }}</td>
+        <td>{{ nextShift?.startTime }}</td>
+        <td>{{ nextShift?.endTime }}</td>
+        <td>{{ nextShift?.wage | currency }}</td>
+        <td>{{ nextShift?.location }}</td>
+        <td>{{ nextShift?.totalShiftWage() | currency }}</td>
+      </tr>
+    </tbody>
+  </table>
+  <p *ngIf="!nextShift">No upcoming shift</p>
+</div>

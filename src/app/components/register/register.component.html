@@ -51,6 +51,7 @@
           autocomplete="username"
           formControlName="username"
           placeholder="Username"
+          maxlength="21"
         />
         <div
           *ngIf="
@@ -83,6 +84,7 @@
           formControlName="password"
           placeholder="Password"
         />
+        <app-show-password></app-show-password>
         <div
           *ngIf="
             !passwordValid && (f['password'].dirty || f['password'].touched)
@@ -113,6 +115,7 @@
           formControlName="confirmPassword"
           placeholder="Confirm password"
         />
+        <app-show-password></app-show-password>
         <div
           *ngIf="
             !confirmPasswordValid &&
@@ -151,6 +154,7 @@
           autocomplete="given-name"
           formControlName="firstName"
           placeholder="First name"
+          maxlength="21"
         />
         <div
           *ngIf="
@@ -171,6 +175,7 @@
           autocomplete="family-name"
           formControlName="lastName"
           placeholder="Last name"
+          maxlength="21"
         />
         <div
           *ngIf="
@@ -231,4 +236,6 @@
   </fieldset>
 </form>
 
-<p>Already registered? Login <a [routerLink]="'/login'">here!</a></p>
+<p class="guide-paragraph">
+  Already registered? Login <a [routerLink]="'/login'">here!</a>
+</p>

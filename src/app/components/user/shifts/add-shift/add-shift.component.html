@@ -1,0 +1,222 @@
+<h1 class="fs-secondary__heading">Add shift</h1>
+
+<form [formGroup]="addShiftForm" (ngSubmit)="addShift(addShiftForm)">
+  <fieldset class="flex-column flow">
+    <mat-icon routerLink="/shifts">close</mat-icon>
+    <legend>Shift details</legend>
+    <div class="input-container flex-column">
+      <div class="form-field">
+        <label for="startDate">Start date</label>
+        <input type="date" formControlName="startDate" #startDate />
+        <div
+          *ngIf="
+            addShiftForm.controls['startDate'].invalid &&
+            (addShiftForm.controls['startDate'].dirty ||
+              addShiftForm.controls['startDate'].touched)
+          "
+          class="error"
+        >
+          <p *ngIf="addShiftForm.controls['startDate'].errors?.['required']">
+            Required
+          </p>
+        </div>
+      </div>
+      <div class="form-field">
+        <label for="startTime">Start time</label>
+        <input type="time" formControlName="startTime" #startTime />
+        <div
+          *ngIf="
+            addShiftForm.controls['startTime'].invalid &&
+            (addShiftForm.controls['startTime'].dirty ||
+              addShiftForm.controls['startTime'].touched)
+          "
+          class="error"
+        >
+          <p *ngIf="addShiftForm.controls['startTime'].errors?.['required']">
+            Required
+          </p>
+        </div>
+      </div>
+      <div class="form-field">
+        <label for="endDate">End date</label>
+        <input
+          type="date"
+          formControlName="endDate"
+          #endDate
+          (change)="showErrors()"
+        />
+        <div
+          *ngIf="
+            addShiftForm.controls['endDate'].invalid &&
+            (addShiftForm.controls['endDate'].dirty ||
+              addShiftForm.controls['endDate'].touched)
+          "
+          class="error"
+        >
+          <p *ngIf="addShiftForm.controls['endDate'].errors?.['required']">
+            Required
+          </p>
+        </div>
+      </div>
+      <div class="form-field">
+        <label for="endTime">End time</label>
+        <input
+          type="time"
+          formControlName="endTime"
+          #endTime
+          (change)="showErrors()"
+        />
+        <div
+          *ngIf="
+            addShiftForm.controls['endTime'].invalid &&
+            (addShiftForm.controls['endTime'].dirty ||
+              addShiftForm.controls['endTime'].touched)
+          "
+          class="error"
+        >
+          <p *ngIf="addShiftForm.controls['endTime'].errors?.['required']">
+            Required
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="input-container flex-column">
+      <div class="form-field">
+        <label for="hourlyWage">Wage / h</label>
+        <input
+          type="number"
+          placeholder="Wage / h"
+          formControlName="wage"
+          #wage
+        />
+        <div
+          *ngIf="
+            addShiftForm.controls['wage'].invalid &&
+            (addShiftForm.controls['wage'].dirty ||
+              addShiftForm.controls['wage'].touched)
+          "
+          class="error"
+        >
+          <p *ngIf="addShiftForm.controls['wage'].errors?.['required']">
+            Required
+          </p>
+        </div>
+      </div>
+      <div class="location-container form-field">
+        <label for="location">Location</label>
+        <input
+          type="text"
+          placeholder="Location"
+          id="location"
+          formControlName="location"
+          #location
+          maxlength="21"
+          (input)="onLocationInput($event)"
+          (focus)="onLocationFocus()"
+        />
+        <div *ngIf="filteredLocations.length > 0" class="dropdown-select">
+          <ul>
+            <li
+              *ngFor="let location of filteredLocations"
+              (click)="selectLocation(location)"
+              class="dropdown-select__item"
+            >
+              {{ location }}
+            </li>
+          </ul>
+        </div>
+        <div
+          *ngIf="
+            addShiftForm.controls['location'].invalid &&
+            (addShiftForm.controls['location'].dirty ||
+              addShiftForm.controls['location'].touched)
+          "
+          class="error"
+        >
+          <p *ngIf="addShiftForm.controls['location'].errors?.['required']">
+            Required
+          </p>
+          <p *ngIf="addShiftForm.controls['location'].errors?.['minlength']">
+            Min length is 2 chars
+          </p>
+          <p *ngIf="addShiftForm.controls['location'].errors?.['maxlength']">
+            Max length is 20 chars
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="input-container flex-column">
+      <div class="form-field">
+        <label for="name">Unique name</label>
+        <input
+          type="text"
+          placeholder="Unique name"
+          formControlName="uniqueName"
+          #uniqueName
+          maxlength="21"
+        />
+        <div
+          *ngIf="
+            addShiftForm.controls['uniqueName'].invalid &&
+            (addShiftForm.controls['uniqueName'].dirty ||
+              addShiftForm.controls['uniqueName'].touched)
+          "
+          class="error"
+        >
+          <p *ngIf="addShiftForm.controls['uniqueName'].errors?.['required']">
+            Required
+          </p>
+          <p
+            *ngIf="
+              addShiftForm.controls['uniqueName'].errors?.['minlength']
+            "
+          >
+            Minimum 2 characters
+          </p>
+          <p
+            *ngIf="
+              addShiftForm.controls['uniqueName'].errors?.['maxlength']
+            "
+          >
+            Maximum 20 characters
+          </p>
+          <p *ngIf="addShiftForm.controls['uniqueName'].errors?.['uniqueName']">
+            Name already exists
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="input-container flex-column">
+      <div class="form-field">
+        <label for="description">Description</label>
+        <textarea
+          cols="50"
+          maxlength="201"
+          placeholder="Description"
+          formControlName="description"
+          #description
+        ></textarea>
+        <div
+          *ngIf="
+            addShiftForm.controls['description'].invalid &&
+            (addShiftForm.controls['description'].dirty ||
+              addShiftForm.controls['description'].touched)
+          "
+          class="error"
+        >
+          <p *ngIf="addShiftForm.controls['description'].errors?.['required']">
+            Required
+          </p>
+          <p *ngIf="addShiftForm.controls['description'].errors?.['maxlength']">
+            Maximum 200 characters
+          </p>
+          <p *ngIf="addShiftForm.controls['description'].errors?.['minlength']">
+            Minimum 2 characters
+          </p>
+        </div>
+      </div>
+    </div>
+    <p class="reset" (click)="resetForm()">Made a mistake? <a>Reset form</a></p>
+  </fieldset>
+  <button type="submit" [disabled]="!addShiftForm.valid">Add shift</button>
+</form>

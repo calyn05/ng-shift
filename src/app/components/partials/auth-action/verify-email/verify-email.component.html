@@ -1,0 +1,24 @@
+<h1 class="fs-secondary__heading">Verify your email</h1>
+<form (ngSubmit)="sendVerificationEmail()">
+  <fieldset class="flex-column flow">
+    <mat-icon routerLink="/profile">close</mat-icon>
+
+    <legend>Verify email</legend>
+    <div class="input-container flex-column">
+      <p>
+        Send a verification email! You must have access to this email account
+      </p>
+      <div class="form-field">
+        <label for="email">Email</label>
+        <input
+          type="email"
+          #email
+          autocomplete="email"
+          [value]="value"
+          disabled
+        />
+      </div>
+    </div>
+    <button type="submit" [disabled]="!value">Send</button>
+  </fieldset>
+</form>
