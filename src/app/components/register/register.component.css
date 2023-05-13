@@ -70,15 +70,6 @@ legend {
   transition: all 0.2s ease-in-out;
   font-size: 0.725rem;
 }
-/* 
-@media screen and (min-width: 42em) {
-  .form-field > .error {
-    position: absolute;
-    bottom: -50%;
-    left: 50%;
-    transform: translate(-50%, 10%);
-  }
-} */
 
 .error > p {
   width: 100%;
@@ -94,6 +85,7 @@ input {
   width: 100%;
   padding: 0.5rem;
   border: none;
+  color: var(--main-txt-color);
   border-bottom: 1px solid var(--main-txt-color);
   border-radius: 2vmin;
   background-color: var(--main-background-color);

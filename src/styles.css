@@ -121,6 +121,7 @@ html,
 body {
   min-height: 100vh;
   overflow-x: hidden;
+  color: var(--main-txt-color);
 }
 
 input,
@@ -128,6 +129,7 @@ button,
 textarea,
 select {
   font: inherit;
+  color: var(--main-txt-color);
 }
 
 button {

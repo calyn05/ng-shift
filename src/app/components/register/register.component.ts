@@ -194,18 +194,4 @@ export class RegisterComponent implements OnInit, OnDestroy {
     );
     this.isSubmitted = true;
   }
-
-  patchValues() {
-    this.registerForm.setValue({
-      email: 'john@codes.com ',
-      username: 'johndoe',
-      password: '12Saaa@',
-      confirmPassword: '12Saaa@',
-      firstName: 'John',
-      lastName: 'Codes',
-      age: 20,
-      isAdmin: false,
-      code: 'admin1',
-    });
-  }
 }

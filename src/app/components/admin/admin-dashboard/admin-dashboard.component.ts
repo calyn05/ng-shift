@@ -1,5 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { Chart } from 'chart.js';
+import { AdminService } from 'src/app/shared/services/admin.service';
 import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({
@@ -8,7 +9,8 @@ import { AuthService } from 'src/app/shared/services/auth.service';
   styleUrls: ['./admin-dashboard.component.css'],
 })
 export class AdminDashboardComponent implements OnInit {
-  authService: AuthService = inject(AuthService);
+  private _authService: AuthService = inject(AuthService);
+  private _adminService: AdminService = inject(AdminService);
   chart!: Chart;
 
   data = [

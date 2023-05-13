@@ -10,10 +10,11 @@
   </form>
 </div>
 
-<div class="shift-container">
+<div class="shift-container flex-column">
   <table>
     <thead>
       <tr>
+        <th>No.</th>
         <th>Email</th>
         <th>Username</th>
         <th>First name</th>
@@ -23,12 +24,13 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td>email@email.com</td>
-        <td>username</td>
-        <td>John</td>
-        <td>Smith</td>
-        <td>30</td>
+      <tr *ngFor="let worker of workers; let i = index">
+        <td>{{ i + 1 }}</td>
+        <td>{{ worker.email }}</td>
+        <td>{{ worker.id }}</td>
+        <td>{{ worker.firstName | titlecase }}</td>
+        <td>{{ worker.lastName | titlecase }}</td>
+        <td>{{ worker.age }}</td>
         <td>134</td>
       </tr>
     </tbody>
