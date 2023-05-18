@@ -6,40 +6,44 @@ import {
   HttpInterceptor,
   HttpResponse,
 } from '@angular/common/http';
-import { Observable, tap } from 'rxjs';
+import { Observable, finalize, tap } from 'rxjs';
 import { SnackbarComponent } from 'src/app/components/partials/snackbar/snackbar.component';
+import { LoaderService } from '../services/loader.service';
 
 @Injectable()
 export class HttpInterceptInterceptor implements HttpInterceptor {
-  constructor(private _snackbarComponent: SnackbarComponent) {}
+  private _requests = 0;
+
+  constructor(
+    private _snackbarComponent: SnackbarComponent,
+    private _loader: LoaderService
+  ) {}
 
   intercept(
     request: HttpRequest<unknown>,
     next: HttpHandler
   ): Observable<HttpEvent<unknown>> {
-    return next.handle(request).pipe(
-      tap(
-        (event) => {
-          console.log(event);
+    this._requests++;
+    this._loader.setLoading(true);
 
-          if (event instanceof HttpResponse) {
-            console.log(event.body);
+    return next.handle(request).pipe(
+      finalize(() => {
+        this._requests--;
+        if (this._requests === 0) {
+          this._loader.setLoading(false);
+        }
+      }),
+      tap((event: HttpEvent<any>) => {
+        if (event instanceof HttpResponse) {
+          if (event.body?.message) {
             this._snackbarComponent.openSnackbar(
-              event.statusText,
-              'success',
-              'success-snackbar'
+              event.body.message,
+              'Close',
+              'snackbar-success'
             );
           }
-        },
-        (error) => {
-          console.log(error);
-          this._snackbarComponent.openSnackbar(
-            error.statusText,
-            'error',
-            'error-snackbar'
-          );
         }
-      )
+      })
     );
   }
 }

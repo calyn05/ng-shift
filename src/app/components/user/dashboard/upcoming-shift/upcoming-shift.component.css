@@ -17,6 +17,7 @@ h3 {
 @media screen and (min-width: 42em) {
   .shift-container {
     justify-content: center;
+    align-items: center;
     overflow-x: unset;
   }
 }

@@ -1,58 +1,40 @@
-import { Component, OnDestroy, OnInit, inject } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
-import {
-  MatSnackBar,
-  MatSnackBarHorizontalPosition,
-  MatSnackBarVerticalPosition,
-} from '@angular/material/snack-bar';
+import { Component, OnInit, inject } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SnackbarComponent } from 'src/app/components/partials/snackbar/snackbar.component';
-import { AuthService } from 'src/app/shared/services/auth.service';
-import { ResetPasswordService } from 'src/app/shared/services/reset-password.service';
-import { UserService } from 'src/app/shared/services/user.service';
+import { AdminService } from 'src/app/shared/services/admin.service';
 import { PasswordValidators } from 'src/app/shared/validators/password-match';
 
 @Component({
-  selector: 'app-edit-profile',
-  templateUrl: './edit-profile.component.html',
+  selector: 'app-edit-worker',
+  templateUrl: './edit-worker.component.html',
   styleUrls: [
-    './edit-profile.component.css',
-    '../../../register/register.component.css',
+    './edit-worker.component.css',
+    '../../../../user/profile/edit-profile/edit-profile.component.css',
+    '../../../../register/register.component.css',
   ],
 })
-export class EditProfileComponent implements OnInit, OnDestroy {
+export class EditWorkerComponent implements OnInit {
   private _route: ActivatedRoute = inject(ActivatedRoute);
   private _router: Router = inject(Router);
-  private _snackBar: MatSnackBar = inject(MatSnackBar);
-  private _authService: AuthService = inject(AuthService);
-  private _userService: UserService = inject(UserService);
-  private _resetPasswordService: ResetPasswordService =
-    inject(ResetPasswordService);
-
-  opened!: boolean;
-  isSubmitted: boolean = false;
+  private _adminService: AdminService = inject(AdminService);
+  private _snackbarComponent: SnackbarComponent = inject(SnackbarComponent);
 
   editForm!: FormGroup;
   editables: HTMLInputElement[] = [];
+  opened!: boolean;
+  isSubmitted: boolean = false;
+  username!: string;
 
   property!: string;
-
-  constructor(private _snackbarComponent: SnackbarComponent) {}
 
   ngOnInit(): void {
     this._route.params.subscribe((params) => {
       this.property = params['property'];
+      this.username = params['id'];
     });
 
     this.changeProperty();
-  }
-
-  canExit(): boolean {
-    if (this.editForm.dirty && !this.isSubmitted) {
-      return false;
-    } else {
-      return true;
-    }
   }
 
   changeProperty() {
@@ -125,43 +107,93 @@ export class EditProfileComponent implements OnInit, OnDestroy {
     }
   }
 
-  updateEmail() {
-    this._userService.getUserData().subscribe((data) => {
-      const username = data.username;
+  canExit(): boolean {
+    if (this.editForm.dirty && !this.isSubmitted) {
+      return false;
+    } else {
+      return true;
+    }
+  }
 
-      this._authService.updateEmail(username, this.editForm.value.email);
+  updateEmail() {
+    this._adminService.getWorker(this.username).subscribe((worker) => {
+      const uid = worker[0].uid;
+      this._adminService
+        .updateDbEmail(this.username, this.editForm.value.email)
+        .subscribe(() => {
+          this._adminService
+            .changeWorkerEmail(uid!, this.editForm.value.email)
+            .subscribe(() => {
+              this._snackbarComponent.openSnackbar(
+                'Email updated successfully!',
+                'Success',
+                'success-snackbar'
+              );
+            })
+            .add(() => {
+              this.isSubmitted = true;
+              this._router.navigate(['/admin/workers']);
+            });
+        });
     });
-    this.isSubmitted = true;
   }
 
   updatePassword() {
-    this._resetPasswordService.updatePassword(this.editForm.value.password);
-    this.isSubmitted = true;
+    this._adminService.getWorker(this.username).subscribe((worker) => {
+      const uid = worker[0].uid;
+      this._adminService
+        .changeWorkerPassword(uid!, this.editForm.value.password)
+        .subscribe(() => {
+          this._snackbarComponent.openSnackbar(
+            'Password updated successfully!',
+            'Success',
+            'success-snackbar'
+          );
+        })
+        .add(() => {
+          this.isSubmitted = true;
+          this._router.navigate(['/admin/workers']);
+        });
+    });
   }
 
   updateName() {
-    this.isSubmitted = true;
-    this._userService.getUserData().subscribe((data) => {
-      const username = data.username;
-      const firstName = this.editForm.value.firstName;
-      const lastName = this.editForm.value.lastName;
-
-      this._userService.updatePersonalData(username, firstName, lastName);
+    this._adminService.getWorker(this.username).subscribe(() => {
+      this._adminService
+        .updatePersonalData(
+          this.username,
+          this.editForm.value.firstName,
+          this.editForm.value.lastName
+        )
+        .subscribe(() => {})
+        .add(() => {
+          this._snackbarComponent.openSnackbar(
+            'Name updated successfully!',
+            'Success',
+            'success-snackbar'
+          );
+          this.isSubmitted = true;
+          this._router.navigate(['/admin/workers']);
+        });
     });
   }
 
   updateAge() {
-    this.isSubmitted = true;
-
-    this._userService.getUserData().subscribe((data) => {
-      const username = data.username;
-      const age = this.editForm.value.age;
-
-      this._userService.updatePersonalData(username, '', '', age);
+    this._adminService.getWorker(this.username).subscribe(() => {
+      this._adminService
+        .updatePersonalData(this.username, '', '', this.editForm.value.age)
+        .subscribe(() => {})
+        .add(() => {
+          this._snackbarComponent.openSnackbar(
+            'Age updated successfully!',
+            'Success',
+            'success-snackbar'
+          );
+          this.isSubmitted = true;
+          this._router.navigate(['/admin/workers/' + this.username]);
+        });
     });
   }
-
-  ngOnDestroy(): void {}
 
   get f() {
     return this.editForm.controls;

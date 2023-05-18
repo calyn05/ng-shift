@@ -42,9 +42,7 @@ export class ResetPasswordService {
             );
           })
           .then(() => {
-            this.router.navigate(['/login']).then(() => {
-              window.location.reload();
-            });
+            this.router.navigate(['/login']);
           })
           .catch((error) => {
             this.snackbarComponent.openSnackbar(
@@ -79,9 +77,7 @@ export class ResetPasswordService {
         );
       })
       .then(() => {
-        this.router.navigate(['/login']).then(() => {
-          window.location.reload();
-        });
+        this.router.navigate(['/login']);
       })
       .catch((error) => {
         this.snackbarComponent.openSnackbar(
@@ -105,11 +101,8 @@ export class ResetPasswordService {
           'Success',
           'success-snackbar'
         );
-        this.router.navigate(['/profile']).then(() => {
-          window.location.reload();
-        });
+        this.router.navigate(['/profile']);
       })
-
       .catch((error) => {
         this.snackbarComponent.openSnackbar(
           FirebaseErrors.Parse(error.code),

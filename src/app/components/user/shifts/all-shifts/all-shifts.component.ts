@@ -134,7 +134,7 @@ export class AllShiftsComponent implements OnInit, OnDestroy {
         (error) => {
           this._snackbarComponent.openSnackbar(
             error.message,
-            'error',
+            'Error',
             'error-snakbar'
           );
         }
@@ -199,7 +199,7 @@ export class AllShiftsComponent implements OnInit, OnDestroy {
         (error) => {
           this._snackbarComponent.openSnackbar(
             error.message,
-            'error',
+            'Error',
             'error-snakbar'
           );
         }

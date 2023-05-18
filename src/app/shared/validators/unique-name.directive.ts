@@ -9,7 +9,6 @@ import {
 import { UserService } from '../services/user.service';
 import { Observable, debounceTime, map, of, take } from 'rxjs';
 import { Shift } from '../models/shift';
-import { user } from '@angular/fire/auth';
 
 @Directive({
   selector: '[appUniqueName]',

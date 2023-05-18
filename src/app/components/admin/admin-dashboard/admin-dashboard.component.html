@@ -1,9 +1,12 @@
-<h2 class="fs-secondary__heading">Welcome, admin</h2>
+<h2 class="fs-secondary__heading">Welcome, Admin</h2>
 <app-shifts-chart></app-shifts-chart>
 <app-workers-past-shifts></app-workers-past-shifts>
 <div class="admin-earnings_chart__container">
-  <h3>Month with highest earnings: ####</h3>
-  <p>Income: <span>$12021</span></p>
+  <h3>Last 12 months earnings</h3>
+  <h4 class="center-text">Best month: {{ bestMonth.month | uppercase }}</h4>
+  <p>
+    Income: <span>{{ bestMonth.income | currency }} </span>
+  </p>
   <div class="earnings-chart__container">
     <canvas id="earningsChart">{{ chart }}</canvas>
   </div>

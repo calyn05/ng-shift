@@ -1,5 +1,5 @@
-<h3>Past shifts Week:</h3>
-<div class="shift-container">
+<h3>Week No. {{ week | date : "w" }} shifts</h3>
+<div class="shift-container flex-column">
   <table>
     <thead>
       <tr>
@@ -14,16 +14,21 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td>1</td>
-        <td>shift.date</td>
-        <td>shift.start</td>
-        <td>shift.end</td>
-        <td>Income / h</td>
-        <td>shift.location</td>
-        <td>shift.wage</td>
-        <td>worker name</td>
+      <tr
+        *ngFor="let shift of shifts; let i = index"
+        routerLink="/admin/shifts/edit/{{ shift.uniqueName }}"
+        (click)="setShiftToEdit(shift.uniqueName)"
+      >
+        <td>{{ i + 1 }}</td>
+        <td>{{ shift.startDate }}</td>
+        <td>{{ shift.startTime }}</td>
+        <td>{{ shift.endTime }}</td>
+        <td>{{ shift.wage | currency }}</td>
+        <td>{{ shift.location }}</td>
+        <td>{{ shift.totalShiftWage() | currency }}</td>
+        <td>{{ shift.username }}</td>
       </tr>
     </tbody>
   </table>
+  <p *ngIf="shifts.length < 1">There are no shifts</p>
 </div>

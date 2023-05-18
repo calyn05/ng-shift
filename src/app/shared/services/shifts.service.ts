@@ -73,6 +73,7 @@ export class ShiftsService {
     const q = query(shifts, orderBy('startDate', 'desc'));
 
     return collectionChanges(q).pipe(
+      take(1),
       map((res) => {
         return res.map((shift) => {
           const shiftData = shift.doc.data() as Shift;
@@ -91,6 +92,67 @@ export class ShiftsService {
     );
 
     return collectionChanges(q).pipe(
+      take(1),
+      map((res) => {
+        return res.map((shift) => {
+          const shiftData = shift.doc.data() as Shift;
+          return shiftData;
+        });
+      })
+    );
+  }
+
+  getShiftByName(name: string): Observable<Shift> {
+    const shifts = collection(this._firestore, 'shifts');
+    const q = query(shifts, where('uniqueName', '==', name));
+
+    return collectionChanges(q).pipe(
+      take(1),
+      map((res) => {
+        return res.map((shift) => {
+          const shiftData = shift.doc.data() as Shift;
+          return shiftData;
+        });
+      }),
+      map((res) => {
+        return res[0];
+      })
+    );
+  }
+
+  getShiftsByDate(from: string, to: string): Observable<Shift[]> {
+    const shifts = collection(this._firestore, 'shifts');
+    const q = query(
+      shifts,
+      where('startDate', '>=', from),
+      orderBy('startDate', 'desc')
+    );
+
+    return collectionChanges(q).pipe(
+      take(1),
+      map((res) => {
+        return res.map((shift) => {
+          const shiftData = shift.doc.data() as Shift;
+
+          if (shiftData.startDate > to) {
+            return null as unknown as Shift;
+          }
+          return shiftData;
+        });
+      })
+    );
+  }
+
+  getShiftsByLocation(location: string): Observable<Shift[]> {
+    const shifts = collection(this._firestore, 'shifts');
+    const q = query(
+      shifts,
+      where('location', '==', location),
+      orderBy('startDate', 'desc')
+    );
+
+    return collectionChanges(q).pipe(
+      take(1),
       map((res) => {
         return res.map((shift) => {
           const shiftData = shift.doc.data() as Shift;
@@ -142,6 +204,7 @@ export class ShiftsService {
     );
 
     return collectionChanges(q).pipe(
+      take(1),
       map((res) => {
         const nextShift = res.find((shift) => {
           const shiftDate = new Date(shift.doc.data()['startDate']);
@@ -169,6 +232,7 @@ export class ShiftsService {
     );
 
     return collectionChanges(q).pipe(
+      take(1),
       map((res) => {
         const shifts = res.map((shift) => {
           const shiftData = shift.doc.data() as Shift;

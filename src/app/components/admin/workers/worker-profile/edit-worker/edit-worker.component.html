@@ -1,0 +1,210 @@
+<div class="forms-container flex-column">
+  <fieldset class="flex-column flow" [ngSwitch]="property">
+    <mat-icon routerLink="../../">close</mat-icon>
+
+    <legend>Change {{ property }}</legend>
+
+    <ng-container *ngSwitchCase="'email'">
+      <form [formGroup]="editForm" (ngSubmit)="updateEmail()">
+        <div class="input-container flex-column">
+          <p>Confirm the new email address</p>
+          <div class="form-field">
+            <label for="email">Email</label>
+            <input
+              type="email"
+              #email
+              autocomplete="email"
+              placeholder="Email"
+              formControlName="email"
+            />
+            <div
+              *ngIf="
+                editForm.controls['email'].invalid &&
+                (editForm.controls['email'].dirty ||
+                  editForm.controls['email'].touched)
+              "
+              class="error"
+            >
+              <p *ngIf="editForm.controls['email'].errors?.['required']">
+                Required
+              </p>
+              <p *ngIf="editForm.controls['email'].errors?.['email']">
+                Enter a valid email
+              </p>
+            </div>
+          </div>
+        </div>
+        <button type="submit" [disabled]="!editForm.valid">Update</button>
+      </form>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="'password'">
+      <form [formGroup]="editForm" (ngSubmit)="updatePassword()">
+        <div class="input-container flex-column">
+          <p>Change user's password</p>
+
+          <div class="form-field">
+            <label for="password">New password</label>
+            <input
+              type="password"
+              #newPassword
+              autocomplete="new-password"
+              placeholder="New password"
+              formControlName="password"
+            />
+            <app-show-password></app-show-password>
+            <div
+              *ngIf="
+                !passwordValid && (f['password'].dirty || f['password'].touched)
+              "
+              class="error"
+            >
+              <p
+                *ngIf="!requireValid"
+                [class.invalid]="!requireValid && f['password'].dirty"
+              >
+                Required
+              </p>
+              <p *ngIf="!minLengthValid">Min 6 characters</p>
+              <p *ngIf="!maxLengthValid">Max 20 characters</p>
+              <p *ngIf="!hasNumberValid">At least 1 number</p>
+              <p *ngIf="!hasCapitalCaseValid">At least 1 uppercase</p>
+              <p *ngIf="!hasSmallCaseValid">At least 1 lowercase</p>
+              <p *ngIf="!hasSpecialCharactersValid">
+                At least 1 special character
+              </p>
+            </div>
+          </div>
+
+          <div class="form-field">
+            <label for="password">Confirm password</label>
+            <input
+              type="password"
+              #confirmNewPassword
+              autocomplete="new-password"
+              placeholder="Confirm password"
+              formControlName="confirmPassword"
+            />
+            <app-show-password></app-show-password>
+            <div
+              *ngIf="
+                !confirmPasswordValid &&
+                (f['confirmPassword'].dirty || f['confirmPassword'].touched)
+              "
+              class="error"
+            >
+              <p
+                *ngIf="f['confirmPassword'].errors?.['required']"
+                [class.invalid]="!requireValid && f['confirmPassword'].dirty"
+              >
+                Required
+              </p>
+              <p *ngIf="f['confirmPassword'].errors?.['minLength']">
+                Min 6 characters
+              </p>
+              <p
+                *ngIf="
+              f['confirmPassword'].errors?.['misMatch'] &&
+              f['confirmPassword'].dirty
+              "
+                [class.invalid]="true"
+              >
+                Passwords must match
+              </p>
+            </div>
+          </div>
+        </div>
+        <button type="submit" [disabled]="!editForm.valid">Update</button>
+      </form>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="'name'">
+      <form [formGroup]="editForm" (ngSubmit)="updateName()">
+        <div class="input-container flex-column">
+          <p>Confirm first name and last name</p>
+          <div class="form-field">
+            <label for="first name">First name</label>
+            <input
+              type="text"
+              #firstName
+              autocomplete="given-name"
+              placeholder="First name"
+              formControlName="firstName"
+              maxlength="21"
+            />
+            <div
+              *ngIf="
+                !f['firstName'].valid &&
+                (f['firstName'].dirty || f['firstName'].touched)
+              "
+              class="error"
+            >
+              <p *ngIf="f['firstName'].errors?.['required']">Required</p>
+              <p *ngIf="f['firstName'].errors?.['minlength']">
+                Min 2 characters
+              </p>
+              <p *ngIf="f['firstName'].errors?.['maxlength']">
+                Max 20 characters
+              </p>
+            </div>
+          </div>
+          <div class="form-field">
+            <label for="last name">Last name</label>
+            <input
+              type="text"
+              #lastName
+              autocomplete="family-name"
+              placeholder="Last name"
+              formControlName="lastName"
+              maxlength="21"
+            />
+            <div
+              *ngIf="
+                !f['lastName'].valid &&
+                (f['lastName'].dirty || f['lastName'].touched)
+              "
+              class="error"
+            >
+              <p *ngIf="f['lastName'].errors?.['required']">Required</p>
+              <p *ngIf="f['lastName'].errors?.['minlength']">
+                Min 2 characters
+              </p>
+              <p *ngIf="f['lastName'].errors?.['maxlength']">
+                Max 20 characters
+              </p>
+            </div>
+          </div>
+        </div>
+        <button type="submit" [disabled]="!editForm.valid">Update</button>
+      </form>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="'age'">
+      <form [formGroup]="editForm" (ngSubmit)="updateAge()">
+        <div class="input-container flex-column">
+          <p>Confirm user's age</p>
+          <div class="form-field">
+            <label for="age">Age</label>
+            <input
+              type="number"
+              autocomplete="age"
+              placeholder="Age"
+              min="18"
+              max="130"
+              formControlName="age"
+            />
+            <div
+              *ngIf="!f['age'].valid && (f['age'].dirty || f['age'].touched)"
+              class="error"
+            >
+              <p *ngIf="f['age'].errors?.['required']">Required</p>
+              <p *ngIf="f['age'].errors?.['min']">Min 18 years</p>
+              <p *ngIf="f['age'].errors?.['max']">Max 130 years</p>
+            </div>
+          </div>
+        </div>
+        <button type="submit" [disabled]="!editForm.valid">Update</button>
+      </form>
+    </ng-container>
+  </fieldset>
+</div>

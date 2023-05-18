@@ -1,4 +1,10 @@
-<h3>Workers with most shifts week: ####</h3>
+<h3>Workers with most shifts week: {{ pastWeek | date : "w" }}</h3>
 <div class="shifts-chart__container">
   <canvas id="shiftsChart">{{ chart }}</canvas>
+</div>
+<div class="shifts-chart__container">
+  <canvas id="incomeChart">{{ incomeChart }}</canvas>
+</div>
+<div class="shifts-chart__container">
+  <canvas id="hoursChart">{{ hoursChart }}</canvas>
 </div>

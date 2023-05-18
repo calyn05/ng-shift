@@ -1,50 +1,172 @@
 <h1 class="fs-secondary__heading">Edit shift</h1>
-<h2>Shift #### completed by worker $$$$</h2>
-<form>
+<h2>Shift < {{ shiftName }} > Worker {{ shiftWorker | uppercase }}</h2>
+<form [formGroup]="updateShiftForm" (ngSubmit)="updateShift(updateShiftForm)">
   <fieldset class="flex-column flow">
-    <a class="cancel" routerLink="/admin/shifts">x</a>
+    <mat-icon routerLink="/admin/shifts">close</mat-icon>
     <legend>Shift details</legend>
     <div class="input-container flex-column">
       <div class="form-field">
         <label for="startDate">Start date</label>
-        <input type="date" />
+        <input type="date" formControlName="startDate" />
+        <div
+          *ngIf="
+            f['startDate'].invalid &&
+            (f['startDate'].dirty || f['startDate'].touched)
+          "
+          class="error"
+        >
+          <p
+            *ngIf="f['startDate'].errors?.['required'] && f['startDate'].dirty"
+          >
+            Required
+          </p>
+        </div>
       </div>
       <div class="form-field">
         <label for="startTime">Start time</label>
-        <input type="time" />
+        <input type="time" formControlName="startTime" />
+        <div
+          *ngIf="
+            f['startTime'].invalid &&
+            (f['startTime'].dirty || f['startTime'].touched)
+          "
+          class="error"
+        >
+          <p
+            *ngIf="f['startTime'].errors?.['required'] && f['startTime'].dirty"
+          >
+            Required
+          </p>
+        </div>
       </div>
       <div class="form-field">
         <label for="endDate">End date</label>
-        <input type="date" />
+        <input type="date" formControlName="endDate" (change)="showErrors()" />
+        <div
+          *ngIf="
+            f['endDate'].invalid && (f['endDate'].dirty || f['endDate'].touched)
+          "
+          class="error"
+        >
+          <p *ngIf="f['endDate'].errors?.['required'] && f['endDate'].dirty">
+            Required
+          </p>
+        </div>
       </div>
       <div class="form-field">
         <label for="endTime">End time</label>
-        <input type="time" />
+        <input type="time" formControlName="endTime" (change)="showErrors()" />
+        <div
+          *ngIf="
+            f['endTime'].invalid && (f['endTime'].dirty || f['endTime'].touched)
+          "
+          class="error"
+        >
+          <p *ngIf="f['endTime'].errors?.['required'] && f['endTime'].dirty">
+            Required
+          </p>
+        </div>
       </div>
     </div>
     <div class="input-container flex-column">
-      <div class="form-field flex">
+      <div class="form-field">
         <label for="hourlyWage">Wage / h</label>
-        <input type="number" placeholder="Wage / h" />
+        <input type="number" placeholder="Wage / h" formControlName="wage" />
+        <div
+          *ngIf="f['wage'].invalid && (f['wage'].dirty || f['wage'].touched)"
+          class="error"
+        >
+          <p *ngIf="f['wage'].errors?.['required'] && f['wage'].dirty">
+            Required
+          </p>
+
+          <p *ngIf="f['wage'].errors?.['max'] && f['wage'].dirty">
+            Max value exceeded
+          </p>
+        </div>
       </div>
       <div class="form-field">
         <label for="location">Location</label>
-        <input type="text" placeholder="Location" />
+        <input
+          type="text"
+          placeholder="Location"
+          formControlName="location"
+          maxlength="21"
+        />
+        <div class="error">
+          <p *ngIf="f['location'].errors?.['required'] && f['location'].dirty">
+            Required
+          </p>
+          <p *ngIf="f['location'].errors?.['minlength']">Min 2 characters</p>
+          <p *ngIf="f['location'].errors?.['maxlength']">Max 21 characters</p>
+        </div>
       </div>
     </div>
     <div class="input-container flex-column">
       <div class="form-field">
         <label for="name">Unique name</label>
-        <input type="text" placeholder="Unique name" />
+        <input
+          type="text"
+          placeholder="Unique name"
+          formControlName="uniqueName"
+          maxlength="21"
+        />
+        <div class="error">
+          <p
+            *ngIf="
+              f['uniqueName'].errors?.['required'] && f['uniqueName'].dirty
+            "
+          >
+            Required
+          </p>
+          <p *ngIf="f['uniqueName'].errors?.['minlength']">Min 2 characters</p>
+          <p *ngIf="f['uniqueName'].errors?.['maxlength']">Max 21 characters</p>
+          <p *ngIf="f['uniqueName'].errors?.['uniqueName']">
+            Name already exists
+          </p>
+        </div>
       </div>
     </div>
     <div class="input-container flex-column">
       <div class="form-field">
         <label for="description">Description</label>
-        <textarea cols="50" placeholder="Description"></textarea>
+        <textarea
+          cols="50"
+          placeholder="Description"
+          formControlName="description"
+          maxlength="201"
+        ></textarea>
+        <div
+          *ngIf="
+            f['description'].invalid &&
+            (f['description'].dirty || f['description'].touched)
+          "
+          class="error"
+        >
+          <p
+            *ngIf="f['description'].errors?.['required'] && 
+          updateShiftForm.controls['description'].dirty
+          "
+          >
+            Required
+          </p>
+          <p *ngIf="f['description'].errors?.['minlength']">
+            Minimum 2 characters
+          </p>
+          <p *ngIf="f['description'].errors?.['maxlength']">
+            Maximum 200 characters
+          </p>
+        </div>
       </div>
     </div>
-    <p class="reset">Made a mistake? <a>Reset form</a></p>
+    <p class="delete">
+      No longer nedded? <a (click)="openDialog()">Delete shift</a>
+    </p>
   </fieldset>
-  <button type="submit" disabled>Update</button>
+  <button
+    type="submit"
+    [disabled]="updateShiftForm.invalid || updateShiftForm.pristine"
+  >
+    Update
+  </button>
 </form>

@@ -121,7 +121,7 @@
             Required
           </p>
           <p *ngIf="updateShiftForm.controls['wage'].errors?.['max']">
-            Maximum 10 mil
+            Max value exceeded
           </p>
         </div>
       </div>
@@ -150,10 +150,10 @@
             Required
           </p>
           <p *ngIf="updateShiftForm.controls['location'].errors?.['minlength']">
-            Minimum 2 characters
+            Min 2 characters
           </p>
           <p *ngIf="updateShiftForm.controls['location'].errors?.['maxlength']">
-            Maximum 20 characters
+            Max 20 characters
           </p>
         </div>
       </div>

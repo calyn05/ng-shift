@@ -7,18 +7,15 @@ h1 {
   position: relative;
 }
 
-.close-button {
+mat-icon {
   position: absolute;
+  top: 1.5rem;
   right: 1rem;
-  top: 20%;
-  padding: 0.1rem 0.7rem;
-  font-size: var(--fs-600);
-  border: none;
-  border-radius: 2vmin;
+  cursor: pointer;
   background-color: var(--section-background-color);
-  box-shadow: 0 0 0.5rem 0.1rem var(--section-background-color);
+  border-radius: 50%;
 }
 
-.close-button:hover {
-  background-color: hsla(0, 100%, 20%, 0.9);
+mat-icon:hover {
+  background-color: var(--highlight-color);
 }

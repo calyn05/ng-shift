@@ -1,14 +1,22 @@
 <h1 class="fs-secondary__heading">Workers</h1>
 
 <div class="search-container flex">
-  <form>
+  <form (ngSubmit)="searchWorker(username.value); username.value = ''">
     <fieldset>
       <legend>Search worker</legend>
-      <input type="text" />
+      <input
+        type="text"
+        placeholder="Username"
+        #username
+        (focus)="getWorkers()"
+      />
       <button type="submit">Search</button>
     </fieldset>
   </form>
 </div>
+<p class="center-text" *ngIf="searchTerm">
+  Search results with: {{ searchTerm }}
+</p>
 
 <div class="shift-container flex-column">
   <table>
@@ -24,14 +32,17 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let worker of workers; let i = index">
+      <tr
+        *ngFor="let worker of workers; let i = index"
+        routerLink="/admin/workers/{{ worker.id }}"
+      >
         <td>{{ i + 1 }}</td>
         <td>{{ worker.email }}</td>
         <td>{{ worker.id }}</td>
         <td>{{ worker.firstName | titlecase }}</td>
         <td>{{ worker.lastName | titlecase }}</td>
         <td>{{ worker.age }}</td>
-        <td>134</td>
+        <td>{{ worker.shifts?.length || 0 }}</td>
       </tr>
     </tbody>
   </table>

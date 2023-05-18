@@ -135,10 +135,6 @@ button:enabled {
   button {
     padding: 0.2rem 1rem;
   }
-
-  p:last-of-type {
-    margin-top: 0;
-  }
 }
 
 .guide-paragraph {

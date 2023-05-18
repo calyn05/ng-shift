@@ -8,57 +8,81 @@
 </div>
 <div class="search-container flex">
   <ng-container [ngSwitch]="searchBy">
-    <form *ngSwitchDefault>
+    <form
+      *ngSwitchDefault
+      (ngSubmit)="
+        searchByDate(startDate.value, endDate.value);
+        startDate.value = '';
+        endDate.value = ''
+      "
+    >
       <fieldset>
         <legend>Search by date</legend>
         <span>From: </span>
-        <input type="date" />
+        <input type="date" #startDate />
         <span>to: </span>
-        <input type="date" />
+        <input type="date" #endDate />
         <button type="submit">Search</button>
       </fieldset>
     </form>
 
-    <form *ngSwitchCase="'search_by_worker'">
+    <form
+      *ngSwitchCase="'search_by_worker'"
+      (ngSubmit)="searchByWorker(worker.value); worker.value = ''"
+    >
       <fieldset>
         <legend>Search by worker</legend>
-        <input type="text" />
+        <input type="text" placeholder="Username" #worker />
         <button type="submit">Search</button>
       </fieldset>
     </form>
 
-    <form *ngSwitchCase="'search_by_location'">
+    <form
+      *ngSwitchCase="'search_by_location'"
+      (ngSubmit)="searchByLocation(location.value); location.value = ''"
+    >
       <fieldset>
         <legend>Search by location</legend>
-        <input type="text" />
+        <input type="text" placeholder="Location" #location />
         <button type="submit">Search</button>
       </fieldset>
     </form>
   </ng-container>
 </div>
 
-<div class="shift-container">
+<div class="shift-container flex-column">
+  <p *ngIf="startDate && endDate">
+    Shifts between {{ startDate }} - {{ endDate }}
+  </p>
+  <p *ngIf="location">Results with {{ location | uppercase }}</p>
+  <p *ngIf="worker">Results with {{ worker | uppercase }}</p>
   <table>
     <thead>
       <tr>
+        <th>No.</th>
         <th>Worker</th>
         <th>Shift date</th>
         <th>Shift start</th>
         <th>Shift end</th>
-        <th>Price / h</th>
+        <th>Wage / h</th>
         <th>Shift location</th>
         <th>Profit</th>
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td>shift.worker</td>
-        <td>shift.date</td>
-        <td>shift.start</td>
-        <td>shift.end</td>
-        <td>shift price / h</td>
-        <td>shift.location</td>
-        <td>shift.wage</td>
+      <tr
+        *ngFor="let shift of shifts; let i = index"
+        routerLink="/admin/shifts/edit/{{ shift.uniqueName }}"
+        (click)="setShiftToEdit(shift.uniqueName)"
+      >
+        <td>{{ i + 1 }}</td>
+        <td>{{ shift.username }}</td>
+        <td>{{ shift.startDate }}</td>
+        <td>{{ shift.startTime }}</td>
+        <td>{{ shift.endTime }}</td>
+        <td>{{ shift.wage | currency }}</td>
+        <td>{{ shift.location }}</td>
+        <td>{{ shift.totalShiftWage() | currency }}</td>
       </tr>
     </tbody>
   </table>

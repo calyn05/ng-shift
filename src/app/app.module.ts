@@ -66,6 +66,9 @@ import { DialogComponent } from './components/partials/dialog/dialog.component';
 import { SpinnerComponent } from './components/partials/spinner/spinner.component';
 import { ResetPasswordComponent } from './components/partials/auth-action/reset-password/reset-password.component';
 import { AuthActionComponent } from './components/partials/auth-action/auth-action.component';
+import { isAdminGuard } from './shared/guards/admin.guard';
+import { isUserGuard } from './shared/guards/user.guard';
+import { EditWorkerComponent } from './components/admin/workers/worker-profile/edit-worker/edit-worker.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -86,67 +89,73 @@ const routes: Routes = [
   },
   {
     path: 'dashboard',
-    canActivate: [activateGuard],
+    canActivate: [activateGuard, isUserGuard],
     component: DashboardComponent,
   },
   {
     path: 'shifts',
-    canActivate: [activateGuard],
+    canActivate: [activateGuard, isUserGuard],
     component: ShiftsComponent,
   },
   {
     path: 'add-shift',
-    canActivate: [activateGuard],
+    canActivate: [activateGuard, isUserGuard],
     canDeactivate: [canDeactivate],
     component: AddShiftComponent,
     pathMatch: 'full',
   },
   {
     path: 'edit/:id',
-    canActivate: [activateGuard],
+    canActivate: [activateGuard, isUserGuard],
     canDeactivate: [canDeactivate],
     component: EditShiftComponent,
   },
   {
     path: 'profile',
-    canActivate: [activateGuard],
+    canActivate: [activateGuard, isUserGuard],
     component: ProfileComponent,
   },
   {
     path: 'profile/edit/:property',
-    canActivate: [activateGuard],
+    canActivate: [activateGuard, isUserGuard],
     canDeactivate: [canDeactivate],
     component: EditProfileComponent,
   },
   {
     path: 'admin/dashboard',
-    canActivate: [activateGuard],
+    canActivate: [activateGuard, isAdminGuard],
     component: AdminDashboardComponent,
   },
   {
     path: 'admin/workers',
-    canActivate: [activateGuard],
+    canActivate: [activateGuard, isAdminGuard],
     component: WorkersComponent,
   },
   {
     path: 'admin/shifts',
-    canActivate: [activateGuard],
+    canActivate: [activateGuard, isAdminGuard],
     component: AdminShiftsComponent,
   },
   {
     path: 'admin/shifts/edit/:id',
-    canActivate: [activateGuard],
+    canActivate: [activateGuard, isAdminGuard],
     canDeactivate: [canDeactivate],
     component: AdminEditShiftComponent,
   },
   {
     path: 'admin/workers/:id',
-    canActivate: [activateGuard],
+    canActivate: [activateGuard, isAdminGuard],
     component: WorkerProfileComponent,
   },
   {
+    path: 'admin/workers/:id/edit/:property',
+    canActivate: [activateGuard, isAdminGuard],
+    canDeactivate: [canDeactivate],
+    component: EditWorkerComponent,
+  },
+  {
     path: 'admin/workers/:id/shifts',
-    canActivate: [activateGuard],
+    canActivate: [activateGuard, isAdminGuard],
     component: WorkerShiftsComponent,
   },
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -189,6 +198,7 @@ const routes: Routes = [
     SpinnerComponent,
     ResetPasswordComponent,
     AuthActionComponent,
+    EditWorkerComponent,
   ],
   imports: [
     BrowserModule,

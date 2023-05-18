@@ -1,3 +1,5 @@
+import { Shift } from './shift';
+
 export interface dbUser {
   id?: string;
   username: string;
@@ -6,5 +8,6 @@ export interface dbUser {
   age: number;
   isAdmin: boolean;
   email?: string;
-  shifts?: object[];
+  uid?: string;
+  shifts?: Shift[];
 }
