@@ -1,4 +1,4 @@
-<div class="search-container flex">
+<div class="search-container flex" *ngIf="myShifts.length > 0">
   <form>
     <fieldset>
       <legend>Search by date</legend>
@@ -39,7 +39,7 @@
     Shifts between {{ dateStart }} - {{ dateEnd }}
   </p>
   <p *ngIf="shiftLocation">Results with {{ shiftLocation | uppercase }}</p>
-  <table>
+  <table *ngIf="myShifts.length > 0">
     <thead>
       <tr>
         <th>No.</th>
@@ -67,5 +67,5 @@
       </tr>
     </tbody>
   </table>
-  <p *ngIf="myShifts.length < 1">You don't have shifts</p>
+  <p class="center-text" *ngIf="myShifts.length < 1">You don't have shifts</p>
 </div>

@@ -16,7 +16,6 @@ fieldset {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: clamp(15rem, 70%, 50rem);
   padding: 2rem;
   border: 1px solid var(--highlight-color-link-hover);
   border-radius: 2vmin;
@@ -33,6 +32,10 @@ fieldset {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+  }
+
+  fieldset {
+    width: clamp(42rem, 70%, 60rem);
   }
 }
 

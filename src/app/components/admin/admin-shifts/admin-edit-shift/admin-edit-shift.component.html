@@ -1,5 +1,10 @@
 <h1 class="fs-secondary__heading">Edit shift</h1>
-<h2>Shift < {{ shiftName }} > Worker {{ shiftWorker | uppercase }}</h2>
+<h2>
+  Shift < {{ shiftName }} > Worker
+  <a routerLink="/admin/workers/{{ shiftWorker }}">
+    {{ shiftWorker | uppercase }}
+  </a>
+</h2>
 <form [formGroup]="updateShiftForm" (ngSubmit)="updateShift(updateShiftForm)">
   <fieldset class="flex-column flow">
     <mat-icon routerLink="/admin/shifts">close</mat-icon>

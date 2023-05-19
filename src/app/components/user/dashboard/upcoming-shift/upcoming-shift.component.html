@@ -1,6 +1,6 @@
 <h3>Upcoming shift in {{ nextShift?.location | uppercase }}</h3>
 <div class="shift-container flex-column">
-  <table>
+  <table *ngIf="nextShift">
     <thead>
       <tr>
         <th>Shift date</th>
@@ -15,14 +15,14 @@
       <tr
         *ngIf="nextShift !== undefined"
         (click)="setShiftToEdit(editShift)"
-        routerLink="/edit/{{ nextShift?.uniqueName }}"
+        routerLink="/edit/{{ nextShift.uniqueName }}"
       >
-        <td>{{ nextShift?.startDate }}</td>
-        <td>{{ nextShift?.startTime }}</td>
-        <td>{{ nextShift?.endTime }}</td>
-        <td>{{ nextShift?.wage | currency }}</td>
-        <td>{{ nextShift?.location }}</td>
-        <td>{{ nextShift?.totalShiftWage() | currency }}</td>
+        <td>{{ nextShift.startDate }}</td>
+        <td>{{ nextShift.startTime }}</td>
+        <td>{{ nextShift.endTime }}</td>
+        <td>{{ nextShift.wage | currency }}</td>
+        <td>{{ nextShift.location }}</td>
+        <td>{{ nextShift.totalShiftWage() | currency }}</td>
       </tr>
     </tbody>
   </table>

@@ -1,11 +1,5 @@
 fieldset {
-  max-width: clamp(15rem, 50%, 30rem);
-}
-
-@media screen and (max-width: 42em) {
-  fieldset {
-    max-width: 100%;
-  }
+  width: clamp(18rem, 50%, 30rem) !important;
 }
 
 .forgot-pass {

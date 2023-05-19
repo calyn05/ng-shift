@@ -1,6 +1,6 @@
 <h3>Past shifts Week No. {{ week | date : "w" }}</h3>
 <div class="shift-container flex-column">
-  <table>
+  <table *ngIf="pastShifts.length > 0">
     <thead>
       <tr>
         <th>No.</th>
@@ -28,5 +28,5 @@
       </tr>
     </tbody>
   </table>
-  <p *ngIf="pastShifts.length < 1">You don't have shifts</p>
+  <p *ngIf="pastShifts.length < 1">No shifts recorded last week</p>
 </div>

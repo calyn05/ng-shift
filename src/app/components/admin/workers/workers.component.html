@@ -1,6 +1,6 @@
 <h1 class="fs-secondary__heading">Workers</h1>
 
-<div class="search-container flex">
+<div class="search-container flex" *ngIf="workers.length > 0">
   <form (ngSubmit)="searchWorker(username.value); username.value = ''">
     <fieldset>
       <legend>Search worker</legend>
@@ -19,7 +19,7 @@
 </p>
 
 <div class="shift-container flex-column">
-  <table>
+  <table *ngIf="workers.length > 0">
     <thead>
       <tr>
         <th>No.</th>
@@ -46,4 +46,5 @@
       </tr>
     </tbody>
   </table>
+  <p class="center-text" *ngIf="workers.length === 0">No workers found</p>
 </div>

@@ -1,12 +1,12 @@
 <div class="flex header-container">
   <h1 class="fs-secondary__heading">Shifts</h1>
-  <select [(ngModel)]="searchBy">
+  <select [(ngModel)]="searchBy" *ngIf="shifts.length > 0">
     <option value="search_by_date">Search by date</option>
     <option value="search_by_worker">Search by worker</option>
     <option value="search_by_location">Search by location</option>
   </select>
 </div>
-<div class="search-container flex">
+<div class="search-container flex" *ngIf="shifts.length > 0">
   <ng-container [ngSwitch]="searchBy">
     <form
       *ngSwitchDefault
@@ -56,7 +56,7 @@
   </p>
   <p *ngIf="location">Results with {{ location | uppercase }}</p>
   <p *ngIf="worker">Results with {{ worker | uppercase }}</p>
-  <table>
+  <table *ngIf="shifts.length > 0">
     <thead>
       <tr>
         <th>No.</th>
@@ -86,4 +86,5 @@
       </tr>
     </tbody>
   </table>
+  <p class="center-text" *ngIf="shifts.length === 0">No shifts found</p>
 </div>

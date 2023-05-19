@@ -4,7 +4,7 @@
   </h1>
   <mat-icon routerLink="../">close</mat-icon>
 </div>
-<div class="search-container flex">
+<div class="search-container flex" *ngIf="shifts.length > 0">
   <form
     (ngSubmit)="
       searchByDate(startDate.value, endDate.value);
@@ -34,7 +34,7 @@
 <div class="shift-container flex-column">
   <p *ngIf="fromDate && toDate">Shifts between {{ fromDate }} - {{ toDate }}</p>
   <p *ngIf="locationTerm">Results with {{ locationTerm | uppercase }}</p>
-  <table>
+  <table *ngIf="shifts.length > 0">
     <thead>
       <tr>
         <th>No.</th>
@@ -62,4 +62,5 @@
       </tr>
     </tbody>
   </table>
+  <p class="center-text" *ngIf="shifts.length === 0">No shifts found</p>
 </div>

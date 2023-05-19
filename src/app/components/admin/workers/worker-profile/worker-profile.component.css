@@ -15,6 +15,12 @@
   background-color: hsla(0, 100%, 20%, 0.9);
 }
 
+@media screen and (max-width: 42em) {
+  .data-container {
+    margin-top: 2rem;
+  }
+}
+
 .header-container {
   position: relative;
   width: 100%;
